@@ -1,0 +1,14 @@
+C:\HW\С#\RestoRise\RestoRise.Domain\bin\Debug\net8.0\RestoRise.Domain.deps.json
+C:\HW\С#\RestoRise\RestoRise.Domain\bin\Debug\net8.0\RestoRise.Domain.runtimeconfig.json
+C:\HW\С#\RestoRise\RestoRise.Domain\bin\Debug\net8.0\RestoRise.Domain.dll
+C:\HW\С#\RestoRise\RestoRise.Domain\bin\Debug\net8.0\RestoRise.Domain.pdb
+C:\HW\С#\RestoRise\RestoRise.Domain\obj\Debug\net8.0\RestoRise.Domain.csproj.AssemblyReference.cache
+C:\HW\С#\RestoRise\RestoRise.Domain\obj\Debug\net8.0\RestoRise.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\HW\С#\RestoRise\RestoRise.Domain\obj\Debug\net8.0\RestoRise.Domain.AssemblyInfoInputs.cache
+C:\HW\С#\RestoRise\RestoRise.Domain\obj\Debug\net8.0\RestoRise.Domain.AssemblyInfo.cs
+C:\HW\С#\RestoRise\RestoRise.Domain\obj\Debug\net8.0\RestoRise.Domain.csproj.CoreCompileInputs.cache
+C:\HW\С#\RestoRise\RestoRise.Domain\obj\Debug\net8.0\RestoRise.Domain.dll
+C:\HW\С#\RestoRise\RestoRise.Domain\obj\Debug\net8.0\refint\RestoRise.Domain.dll
+C:\HW\С#\RestoRise\RestoRise.Domain\obj\Debug\net8.0\RestoRise.Domain.pdb
+C:\HW\С#\RestoRise\RestoRise.Domain\obj\Debug\net8.0\RestoRise.Domain.genruntimeconfig.cache
+C:\HW\С#\RestoRise\RestoRise.Domain\obj\Debug\net8.0\ref\RestoRise.Domain.dll

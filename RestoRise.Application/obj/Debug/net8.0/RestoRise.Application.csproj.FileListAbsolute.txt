@@ -1,0 +1,15 @@
+C:\HW\С#\RestoRise\RestoRise.Application\bin\Debug\net8.0\RestoRise.Application.deps.json
+C:\HW\С#\RestoRise\RestoRise.Application\bin\Debug\net8.0\RestoRise.Application.dll
+C:\HW\С#\RestoRise\RestoRise.Application\bin\Debug\net8.0\RestoRise.Application.pdb
+C:\HW\С#\RestoRise\RestoRise.Application\bin\Debug\net8.0\RestoRise.Domain.dll
+C:\HW\С#\RestoRise\RestoRise.Application\bin\Debug\net8.0\RestoRise.Domain.pdb
+C:\HW\С#\RestoRise\RestoRise.Application\obj\Debug\net8.0\RestoRise.Application.csproj.AssemblyReference.cache
+C:\HW\С#\RestoRise\RestoRise.Application\obj\Debug\net8.0\RestoRise.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\HW\С#\RestoRise\RestoRise.Application\obj\Debug\net8.0\RestoRise.Application.AssemblyInfoInputs.cache
+C:\HW\С#\RestoRise\RestoRise.Application\obj\Debug\net8.0\RestoRise.Application.AssemblyInfo.cs
+C:\HW\С#\RestoRise\RestoRise.Application\obj\Debug\net8.0\RestoRise.Application.csproj.CoreCompileInputs.cache
+C:\HW\С#\RestoRise\RestoRise.Application\obj\Debug\net8.0\RestoRise.Application.csproj.CopyComplete
+C:\HW\С#\RestoRise\RestoRise.Application\obj\Debug\net8.0\RestoRise.Application.dll
+C:\HW\С#\RestoRise\RestoRise.Application\obj\Debug\net8.0\refint\RestoRise.Application.dll
+C:\HW\С#\RestoRise\RestoRise.Application\obj\Debug\net8.0\RestoRise.Application.pdb
+C:\HW\С#\RestoRise\RestoRise.Application\obj\Debug\net8.0\ref\RestoRise.Application.dll

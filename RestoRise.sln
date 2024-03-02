@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestoRise.Domain", "RestoRise.Domain\RestoRise.Domain.csproj", "{D6F9B55B-FAFD-4A83-8D21-5330F46FC7A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{C1393D9A-EB5C-4AB4-8C07-87AF3C609E77}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{47C51EE5-7CAC-4C72-9B80-00EE69A0D095}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{4C0C765A-1295-442A-82AA-805F3704CA8F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{0583FDAF-4FDA-4BA2-AA63-E4C360B7E837}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestoRise.Application", "RestoRise.Application\RestoRise.Application.csproj", "{1D9A426A-A6D9-4A7F-8786-911BF1BDDAEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestoRise.Storage", "RestoRise.Storage\RestoRise.Storage.csproj", "{71B6ABEC-964C-4A7A-91DB-B5738D0EA54E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestoRise.Api", "RestoRise.Api\RestoRise.Api.csproj", "{7483E230-92DA-431F-9870-B732B15A5C0F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D6F9B55B-FAFD-4A83-8D21-5330F46FC7A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6F9B55B-FAFD-4A83-8D21-5330F46FC7A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6F9B55B-FAFD-4A83-8D21-5330F46FC7A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6F9B55B-FAFD-4A83-8D21-5330F46FC7A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D9A426A-A6D9-4A7F-8786-911BF1BDDAEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D9A426A-A6D9-4A7F-8786-911BF1BDDAEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D9A426A-A6D9-4A7F-8786-911BF1BDDAEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D9A426A-A6D9-4A7F-8786-911BF1BDDAEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71B6ABEC-964C-4A7A-91DB-B5738D0EA54E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71B6ABEC-964C-4A7A-91DB-B5738D0EA54E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71B6ABEC-964C-4A7A-91DB-B5738D0EA54E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71B6ABEC-964C-4A7A-91DB-B5738D0EA54E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7483E230-92DA-431F-9870-B732B15A5C0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7483E230-92DA-431F-9870-B732B15A5C0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7483E230-92DA-431F-9870-B732B15A5C0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7483E230-92DA-431F-9870-B732B15A5C0F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D6F9B55B-FAFD-4A83-8D21-5330F46FC7A8} = {C1393D9A-EB5C-4AB4-8C07-87AF3C609E77}
+		{1D9A426A-A6D9-4A7F-8786-911BF1BDDAEC} = {4C0C765A-1295-442A-82AA-805F3704CA8F}
+		{71B6ABEC-964C-4A7A-91DB-B5738D0EA54E} = {47C51EE5-7CAC-4C72-9B80-00EE69A0D095}
+		{7483E230-92DA-431F-9870-B732B15A5C0F} = {0583FDAF-4FDA-4BA2-AA63-E4C360B7E837}
+	EndGlobalSection
+EndGlobal

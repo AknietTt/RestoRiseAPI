@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\RestoRise.Application\RestoRise.Application.csproj" />
+      <ProjectReference Include="..\RestoRise.Domain\RestoRise.Domain.csproj" />
+    </ItemGroup>
+
+</Project>
