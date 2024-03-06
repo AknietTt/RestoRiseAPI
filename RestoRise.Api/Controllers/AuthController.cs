@@ -6,7 +6,7 @@ using RestoRise.BuisnessLogic.Interfaces;
 namespace RestoRise.Api.Controllers.Auth;
 
 [ApiController]
-[Route("[controller]")]
+[Route("auth")]
 public class AuthController:ControllerBase
 {
     private readonly IUserService _userService;
@@ -16,11 +16,28 @@ public class AuthController:ControllerBase
         _userService = userService;
     }
 
-    [HttpPost("registration/user")]
+    [HttpPost("registration")]
     public async Task<IActionResult> Registration([FromBody] UserCreateDto registration)
     {
         var result = await _userService.Register(registration);
+        if (!result.IsSuccess)
+        {
+            return BadRequest(result);
+        }
         return Ok(result);
     }
+
+    [HttpPost("athorize")]
+    public async Task<IActionResult> Authorize([FromBody] LoginDto loginDto)
+    {
+        var result = await _userService.Authorize(loginDto);
+        if (!result.IsSuccess)
+        {
+            return Unauthorized(result);
+        }
+
+        return Ok(result);
+    }
+    
 
 }

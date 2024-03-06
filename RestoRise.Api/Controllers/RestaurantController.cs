@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RestoRise.BuisnessLogic.DTOs;
 using RestoRise.BuisnessLogic.Interfaces;
 
 namespace RestoRise.Api.Controllers.Restaurants;
 
-
+[Authorize(AuthenticationSchemes = "Bearer")]
 [ApiController]
-[Route("[controller]")]
+[Route("restaurnat")]
 public class RestaurantController:ControllerBase
 {
     private readonly IRestaurnatService _restaurnatService;

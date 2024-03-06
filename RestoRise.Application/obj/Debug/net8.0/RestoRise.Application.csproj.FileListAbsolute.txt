@@ -13,3 +13,4 @@ C:\HW\С#\RestoRise\RestoRise.Application\obj\Debug\net8.0\RestoRise.Application
 C:\HW\С#\RestoRise\RestoRise.Application\obj\Debug\net8.0\refint\RestoRise.Application.dll
 C:\HW\С#\RestoRise\RestoRise.Application\obj\Debug\net8.0\RestoRise.Application.pdb
 C:\HW\С#\RestoRise\RestoRise.Application\obj\Debug\net8.0\ref\RestoRise.Application.dll
+c:\HW\С#\RestoRise\RestoRise.Application\obj\Debug\net8.0\RestoRise.Application.sourcelink.json

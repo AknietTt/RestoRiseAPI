@@ -12,7 +12,7 @@ public static  class DependecyInjection
     public static IServiceCollection ImplementPersistence(this IServiceCollection services, IConfiguration configuration) {
 
         services.AddDbContext<AppDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
-            b => b.MigrationsAssembly("RestoRise.Storage")), ServiceLifetime.Transient);
+            b => b.MigrationsAssembly("RestoRise.Storage")));
 
         services.AddScoped<IAppDbContext>(provider => provider.GetService<AppDbContext>());
         services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -23,7 +23,10 @@ public static  class DependecyInjection
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ICrudRepository<User>, UserRepository>();
 
+        services.AddScoped<ICityRepository, CityRepository>();
+        services.AddScoped<ICrudRepository<City>, CityRepository>();
 
+        
         return services;
     }
 }

@@ -12,3 +12,4 @@ C:\HW\С#\RestoRise\RestoRise.Domain\obj\Debug\net8.0\refint\RestoRise.Domain.dl
 C:\HW\С#\RestoRise\RestoRise.Domain\obj\Debug\net8.0\RestoRise.Domain.pdb
 C:\HW\С#\RestoRise\RestoRise.Domain\obj\Debug\net8.0\RestoRise.Domain.genruntimeconfig.cache
 C:\HW\С#\RestoRise\RestoRise.Domain\obj\Debug\net8.0\ref\RestoRise.Domain.dll
+c:\HW\С#\RestoRise\RestoRise.Domain\obj\Debug\net8.0\RestoRise.Domain.sourcelink.json

@@ -21,10 +21,23 @@ public abstract class BaseRepository<TEntity> : ICrudRepository<TEntity>
         _dbSet = context.Set<TEntity>();
     }
 
-    public async Task<TEntity?> GetAsync(Guid id, string[]? includeProperties = null)
+    // public async Task<TEntity?> GetAsync(Guid id, string[]? includeProperties = null)
+    // {
+    //     var res = await _dbSet.AsNoTracking().ProjectTo<TEntity>(_mapper.ConfigurationProvider, null, includeProperties)
+    //         .FirstOrDefaultAsync(x => x.Id == id);
+    //     return res;
+    // }
+    public async Task<TEntity?> GetAsync(Guid id, params Expression<Func<TEntity, object>>[] includeProperties)
     {
-        return await _dbSet.AsNoTracking().ProjectTo<TEntity>(_mapper.ConfigurationProvider, null, includeProperties)
-            .FirstOrDefaultAsync(x => x.Id == id);
+        var query = _dbSet.AsNoTracking().AsQueryable();
+
+        if (includeProperties != null)
+        {
+            query = includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
+        }
+
+        var res = await query.FirstOrDefaultAsync(x => x.Id == id);
+        return res;
     }
 
     public async Task<TEntity?> FirstOrDefault(Expression<Func<TEntity, bool>>? filter = null, string[]? includeProperties = null)
@@ -108,10 +121,16 @@ public abstract class BaseRepository<TEntity> : ICrudRepository<TEntity>
 
     protected virtual void Delete(TEntity entityToDelete)
     {
+        if (entityToDelete == null)
+        {
+            throw new ArgumentNullException(nameof(entityToDelete), "Entity to delete cannot be null.");
+        }
+
         if (_context.Entry(entityToDelete).State == EntityState.Detached)
         {
             _dbSet.Attach(entityToDelete);
         }
+    
         _dbSet.Remove(entityToDelete);
     }
 

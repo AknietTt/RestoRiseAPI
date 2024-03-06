@@ -1135,7 +1135,8 @@
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "BCrypt.Net-Next": "4.0.3",
-          "RestoRise.Domain": "1.0.0"
+          "RestoRise.Domain": "1.0.0",
+          "System.IdentityModel.Tokens.Jwt": "7.1.2"
         },
         "compile": {
           "bin/placeholder/RestoRise.Application.dll": {}

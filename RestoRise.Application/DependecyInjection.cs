@@ -15,8 +15,8 @@ public static class DependecyInjection
         
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IRestaurnatService , RestaurantService>();
-        
 
+        services.AddScoped<ICityService, CityService>();
         return services;
     }
 }

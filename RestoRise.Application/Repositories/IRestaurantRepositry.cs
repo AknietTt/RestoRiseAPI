@@ -1,6 +1,8 @@
-﻿namespace RestoRise.BuisnessLogic.ICrudRepository;
+﻿using RestoRise.Domain.Entities;
 
-public interface IRestaurantRepositry
+namespace RestoRise.BuisnessLogic.ICrudRepository;
+
+public interface IRestaurantRepositry:ICrudRepository<Restaurant>
 {
     
 }

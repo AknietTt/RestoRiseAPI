@@ -12,5 +12,8 @@ public class UserConfiguration:IEntityTypeConfiguration<User>
         builder
             .HasMany(r => r.Restaurants)
             .WithOne(r => r.Owner);
+
+        builder.Property(bd => bd.DateOfBirthDate).HasColumnType("timestamp without time zone");
+        
     }
 }

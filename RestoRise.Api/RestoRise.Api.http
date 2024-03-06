@@ -1,3 +1,7 @@
+GET http://localhost:80/api/item?id=99
+Accept: application/json
+
+###
 @RestoRise.Api_HostAddress = http://localhost:5022
 
 GET {{RestoRise.Api_HostAddress}}/weatherforecast/

@@ -6,7 +6,8 @@ namespace RestoRise.BuisnessLogic.ICrudRepository;
 public interface ICrudRepository<TEntity>
     where TEntity : Entity
 {
-    Task<TEntity?> GetAsync(Guid id, string[]? includeProperties = null);
+   // Task<TEntity?> GetAsync(Guid id, string[]? includeProperties = null);
+    Task<TEntity?> GetAsync(Guid id, params Expression<Func<TEntity, object>>[] includeProperties);
     Task<TEntity?> FirstOrDefault(Expression<Func<TEntity, bool>>? filter = null, string[]? includeProperties = null);
     Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>>? filter = null,
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, string[]? includeProperties = null);

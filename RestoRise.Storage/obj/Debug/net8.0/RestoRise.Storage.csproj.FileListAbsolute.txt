@@ -15,3 +15,4 @@ C:\HW\С#\RestoRise\RestoRise.Storage\obj\Debug\net8.0\RestoRise.Storage.dll
 C:\HW\С#\RestoRise\RestoRise.Storage\obj\Debug\net8.0\refint\RestoRise.Storage.dll
 C:\HW\С#\RestoRise\RestoRise.Storage\obj\Debug\net8.0\RestoRise.Storage.pdb
 C:\HW\С#\RestoRise\RestoRise.Storage\obj\Debug\net8.0\ref\RestoRise.Storage.dll
+c:\HW\С#\RestoRise\RestoRise.Storage\obj\Debug\net8.0\RestoRise.Storage.sourcelink.json

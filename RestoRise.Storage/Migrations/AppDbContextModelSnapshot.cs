@@ -242,7 +242,7 @@ namespace RestoRise.Storage.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("DateOfBirthDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -286,7 +286,7 @@ namespace RestoRise.Storage.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("DateOfBirthDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Email")
                         .IsRequired()

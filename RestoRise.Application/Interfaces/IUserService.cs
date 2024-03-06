@@ -7,4 +7,5 @@ namespace RestoRise.BuisnessLogic.Interfaces;
 public interface IUserService
 {
     Task<Result<Guid>> Register(UserCreateDto user);
+    Task<Result<string>> Authorize(LoginDto loginDto);
 }

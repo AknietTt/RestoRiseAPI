@@ -18,6 +18,7 @@ public class StaffConfiguration:IEntityTypeConfiguration<Staff>
             .HasMany(c => c.Roles)
             .WithMany(r => r.Staves)
             .UsingEntity(j=>j.ToTable("RoleStaves"));
-        
+
+        builder.Property(bd => bd.DateOfBirthDate).HasColumnType("timestamp without time zone");
     }
 }

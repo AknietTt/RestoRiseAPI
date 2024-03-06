@@ -1,0 +1,15 @@
+﻿@RestoRise.Api_HostAddress = http://localhost:5022
+
+POST {{RestoRise.Api_HostAddress}}/Auth/registration/user
+Content-Type: application/json
+{
+  "firstName": "Акниет",
+  "secondName": "Нурмуханов",
+  "middleName": "Ерланулы",
+  "phoneNumber": "87762236080",
+  "password": "admin123",
+  "email": "admin1@example.com",
+  "dateOfBirthDate": "2004-02-02",
+  "gender": "Мужчина",
+  "telegramNick": null
+}
