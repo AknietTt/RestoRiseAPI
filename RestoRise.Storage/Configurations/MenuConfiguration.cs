@@ -10,7 +10,7 @@ public class MenuConfiguration:IEntityTypeConfiguration<Menu>
     {
         
         builder
-            .HasOne(r => r.Restaurant)
+            .HasMany(r => r.Restaurants)
             .WithOne(m => m.Menu);
 
         builder

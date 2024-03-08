@@ -149,4 +149,8 @@ public abstract class BaseRepository<TEntity> : ICrudRepository<TEntity>
         _context.Entry(entityToUpdate).State = EntityState.Modified;
     }
 
+    public void Attach(TEntity entity)
+    {
+        _dbSet.Attach(entity);
+    }
 }

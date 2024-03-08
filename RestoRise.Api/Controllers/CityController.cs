@@ -17,6 +17,7 @@ public class CityController:ControllerBase
         _cityService = cityService;
     }
 
+    [AllowAnonymous]
     [HttpGet("all")]
     public async Task<IActionResult> GetAllCity()
     {

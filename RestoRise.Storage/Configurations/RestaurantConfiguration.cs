@@ -8,11 +8,10 @@ public class RestaurantConfiguration:IEntityTypeConfiguration<Restaurant>
 {
     public void Configure(EntityTypeBuilder<Restaurant> builder)
     {
-        
+
         builder
             .HasOne(m => m.Menu)
-            .WithOne(r => r.Restaurant)
-            .HasForeignKey<Menu>(m=>m.Id);
+            .WithMany(r => r.Restaurants);
         
            builder
                .HasOne(o => o.Owner)

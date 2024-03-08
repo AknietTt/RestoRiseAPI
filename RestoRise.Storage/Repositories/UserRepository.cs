@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using RestoRise.BuisnessLogic.ICrudRepository;
 using RestoRise.Domain.Entities;
 
@@ -9,5 +10,5 @@ public class UserRepository:BaseRepository<User> , IUserRepository
     public UserRepository(AppDbContext context, IMapper mapper) : base(context, mapper)
     {
     }
-    
+
 }

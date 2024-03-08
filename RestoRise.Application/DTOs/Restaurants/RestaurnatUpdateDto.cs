@@ -1,9 +1,10 @@
 ﻿namespace RestoRise.BuisnessLogic.DTOs;
 
-public class CreateRestaurantDto
+public class RestaurnatUpdateDto
 {
+    public Guid Id { get; set; }
     public string Name { get; set; }
     public string Photo { get; set; }
     public string Description { get; set; }
-    public Guid OwnerId { get; set; }
+
 }

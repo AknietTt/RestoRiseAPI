@@ -8,6 +8,7 @@ public class RestaurantMapping: Profile
 {
     public RestaurantMapping()
     {
-        CreateMap<Restaurant, RestaurantOutputDto>().ReverseMap();;
+        CreateMap<Restaurant, RestaurantCreateDto>().ReverseMap();
+        CreateMap<Restaurant, RestaurantOutputDto>().ReverseMap();
     }
 }

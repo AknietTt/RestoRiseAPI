@@ -18,4 +18,6 @@ public interface ICrudRepository<TEntity>
     Task AddAsync(TEntity entity);
     Task AddRangeAsync(TEntity[] entity);
     void Update(TEntity entityToUpdate);
+    void Attach(TEntity entity);
+
 }

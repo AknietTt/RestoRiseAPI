@@ -2,6 +2,7 @@
 
 namespace RestoRise.BuisnessLogic.ICrudRepository;
 
-public interface IUserRepository: ICrudRepository<User>
+public interface IMenuRepositry:ICrudRepository<Menu>
 {
+    
 }
