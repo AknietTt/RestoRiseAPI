@@ -26,9 +26,11 @@ public static  class DependecyInjection
         services.AddScoped<ICityRepository, CityRepository>();
         services.AddScoped<ICrudRepository<City>, CityRepository>();
 
-        services.AddScoped<IMenuRepositry, MenuRepository>();
+        services.AddScoped<IMenuRepository, MenuRepository>();
         services.AddScoped<ICrudRepository<Menu>, MenuRepository>();
 
+        services.AddScoped<IBranchRepository, BranchRepository>();
+        services.AddScoped<ICrudRepository<Branch>, BranchRepository>();
         
         return services;
     }

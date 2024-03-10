@@ -8,6 +8,6 @@ public class Branch:Entity
     public City City { get; set; }
     
     public Restaurant Restaurant { get; set; }
-    public IEnumerable<Staff> Staves { get; set; }
-    public IEnumerable<Order> Orders { get; set; }
+    public ICollection<Staff> Staves { get; set; }
+    public ICollection<Order> Orders { get; set; }
 }

@@ -17,6 +17,7 @@ public static class DependecyInjection
         services.AddScoped<IRestaurnatService , RestaurantService>();
 
         services.AddScoped<ICityService, CityService>();
+        services.AddScoped<IBranchService, BranchService>();
         return services;
     }
 }
