@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using RestoRise.BuisnessLogic.DTOs.Branch;
-using RestoRise.BuisnessLogic.Interfaces;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using RestoRise.Application.DTOs.Branch;
+using RestoRise.Application.Interfaces.Services;
 
 namespace RestoRise.Api.Controllers;
 [ApiController]
-[Route("[controller]")]
+[Route("branch")]
+[Authorize(AuthenticationSchemes = "Bearer")]
 public class BrachController:ControllerBase
 {
     private readonly IBranchService _branchService;

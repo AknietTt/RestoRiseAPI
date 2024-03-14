@@ -1,8 +1,7 @@
-﻿using RestoRise.BuisnessLogic.DTOs.City;
+﻿using RestoRise.Application.DTOs.City;
 using RestoRise.Domain.Common;
 
-namespace RestoRise.BuisnessLogic.Interfaces;
-
+namespace RestoRise.Application.Interfaces.Services;
 public interface ICityService
 {
     Task<Result<IEnumerable<CityDto>>> GetAllCity();

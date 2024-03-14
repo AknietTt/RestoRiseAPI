@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using RestoRise.BuisnessLogic.DTOs;
-using RestoRise.BuisnessLogic.Interfaces;
+using RestoRise.Application.DTOs;
+using RestoRise.Application.Interfaces.Services;
 
 namespace RestoRise.Api.Controllers.Auth;
 

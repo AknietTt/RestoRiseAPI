@@ -1,17 +1,18 @@
 ﻿using AutoMapper;
-using RestoRise.BuisnessLogic.DTOs;
-using RestoRise.BuisnessLogic.ICrudRepository;
-using RestoRise.BuisnessLogic.Interfaces;
+using RestoRise.Application.DTOs.Restaurant;
+using RestoRise.Application.Interfaces.Repositories;
+using RestoRise.Application.Interfaces.Services;
 using RestoRise.Domain.Common;
 using RestoRise.Domain.Entities;
 
 namespace RestoRise.BuisnessLogic.Services;
 
-public class RestaurantService:IRestaurnatService
+public class RestaurantService : IRestaurnatService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
+
     public RestaurantService(IUnitOfWork unitOfWork, IMapper mapper, IUserRepository userRepository)
     {
         _unitOfWork = unitOfWork;
@@ -21,19 +22,12 @@ public class RestaurantService:IRestaurnatService
 
     public async Task<Result<IEnumerable<RestaurantOutputDto>>> GetAllRestaurants()
     {
-        try
-        {
-            var restaurantRepositry = _unitOfWork.GetRepository<Restaurant>();
-            var restaurnts = await restaurantRepositry.GetAsync();
-        
-            var result = _mapper.Map<IEnumerable<RestaurantOutputDto>>(restaurnts);
+        var restaurantRepositry = _unitOfWork.GetRepository<Restaurant>();
+        var restaurnts = await restaurantRepositry.GetAsync(includeProperties:new [] {"Menu"} );
 
-            return Result<IEnumerable<RestaurantOutputDto>>.Success(result , 200);
-        }
-        catch (Exception ex)
-        {
-            return Result<IEnumerable<RestaurantOutputDto>>.Failure(ex.Message , 500);
-        }
+        var result = _mapper.Map<IEnumerable<RestaurantOutputDto>>(restaurnts);
+
+        return Result<IEnumerable<RestaurantOutputDto>>.Success(result, 200);
     }
 
     public Task<Result<IEnumerable<RestaurantOutputDto>>> GetAllRestaurants(Guid id)
@@ -43,68 +37,47 @@ public class RestaurantService:IRestaurnatService
 
     public async Task<Result<Guid>> CreateRestaurant(RestaurantCreateDto restaurantCreateDto)
     {
-        try
-        {
-            var restaurantRepository = _unitOfWork.GetRepository<Restaurant>();
-            var userRepository = _unitOfWork.GetRepository<User>();
-            var owner = await userRepository.FirstOrDefault(u => u.Id == restaurantCreateDto.OwnerId);
-        
-            if (owner == null)
-            {
-                return Result<Guid>.Failure("Пользователь не найден", 404);
-            }
-            
-            var restaurant = _mapper.Map<Restaurant>(restaurantCreateDto);
-            
-            userRepository.Attach(owner);
-            restaurant.Owner = owner;
-            
-            await restaurantRepository.AddAsync(restaurant);
-            await _unitOfWork.SaveChangesAsync();
+        var restaurantRepository = _unitOfWork.GetRepository<Restaurant>();
+        var userRepository = _unitOfWork.GetRepository<User>();
+        var owner = await userRepository.FirstOrDefault(u => u.Id == restaurantCreateDto.OwnerId);
 
-            return Result<Guid>.Success(restaurant.Id, 200);
-        }
-        catch (Exception e)
-        {
-            return Result<Guid>.Failure(error: e.Message, 400);
-        }
+        if (owner == null) return Result<Guid>.Failure("Пользователь не найден", 404);
+
+        var restaurant = _mapper.Map<Restaurant>(restaurantCreateDto);
+        restaurant.Menu = new Menu();
+        
+        userRepository.Attach(owner);
+        restaurant.Owner = owner;
+
+        await restaurantRepository.AddAsync(restaurant);
+        await _unitOfWork.SaveChangesAsync();
+
+        return Result<Guid>.Success(restaurant.Id, 200);
     }
 
     public async Task<Result<RestaurnatUpdateDto>> UpdateRestaurant(RestaurnatUpdateDto restaurnatUpdateDto)
     {
-        try
-        {
-            var restaurantRepository = _unitOfWork.GetRepository<Restaurant>();
-            var restaurant = await restaurantRepository.GetAsync(restaurnatUpdateDto.Id);
-        
-            restaurant.Name = restaurnatUpdateDto.Name;
-            restaurant.Description = restaurnatUpdateDto.Description;
-            restaurant.Photo = restaurnatUpdateDto.Photo;
-        
-            restaurantRepository.Update(restaurant);
-            await _unitOfWork.SaveChangesAsync();
-            return Result<RestaurnatUpdateDto>.Success(restaurnatUpdateDto, 201);
-        }
-        catch (Exception e)
-        {
-            return Result<RestaurnatUpdateDto>.Failure(error: e.Message, 400);
+        var restaurantRepository = _unitOfWork.GetRepository<Restaurant>();
+        var restaurant = await restaurantRepository.GetAsync(restaurnatUpdateDto.Id);
 
-        }
-        
+        restaurant.Name = restaurnatUpdateDto.Name;
+        restaurant.Description = restaurnatUpdateDto.Description;
+        restaurant.Photo = restaurnatUpdateDto.Photo;
+
+        restaurantRepository.Update(restaurant);
+        await _unitOfWork.SaveChangesAsync();
+        return Result<RestaurnatUpdateDto>.Success(restaurnatUpdateDto, 201);
     }
 
     public async Task<Result<bool>> Delete(Guid id)
     {
-        try
+        var restaurantRepository = _unitOfWork.GetRepository<Restaurant>();
+        if ( !await restaurantRepository.Delete(id))
         {
-          var restaurantRepository =  _unitOfWork.GetRepository<Restaurant>();
-          await restaurantRepository.Delete(id);
-          await _unitOfWork.SaveChangesAsync();
-          return Result<bool>.Success(true);
+            return Result<bool>.Failure("Ошибка при удалений возможно не правильный id", 400);
         }
-        catch (Exception e)
-        {
-            return Result<bool>.Failure(error: e.Message, 400);
-        }
+
+        await _unitOfWork.SaveChangesAsync();
+        return Result<bool>.Success(true);
     }
 }

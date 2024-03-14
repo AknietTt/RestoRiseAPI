@@ -4,6 +4,6 @@ namespace RestoRise.Domain.Entities;
 
 public class Menu:Entity
 {
-    public IEnumerable<Restaurant> Restaurants { get; set; }
-    public IEnumerable<Food> Foods { get; set; }
+    public ICollection<Restaurant> Restaurants { get; set; }
+    public ICollection<Food> Foods { get; set; }
 }

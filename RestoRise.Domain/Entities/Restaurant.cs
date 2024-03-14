@@ -9,7 +9,7 @@ public class Restaurant:Entity
     public string Description { get; set; }
     public User Owner { get; set; }
     public Menu? Menu { get; set; }
-    public IEnumerable<Branch> Branches { get; set; }
+    public ICollection<Branch> Branches { get; set; }
     
     
 }

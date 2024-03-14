@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using RestoRise.BuisnessLogic.ICrudRepository;
+using RestoRise.Application.Interfaces.Repositories;
 using RestoRise.Domain.Common;
 
 namespace RestoRise.Storage;

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RestoRise.BuisnessLogic.DTOs;
-using RestoRise.BuisnessLogic.Interfaces;
+using RestoRise.Application.DTOs.Restaurant;
+using RestoRise.Application.Interfaces.Services;
 using RestoRise.Domain.Common;
 
 namespace RestoRise.Api.Controllers.Restaurants;

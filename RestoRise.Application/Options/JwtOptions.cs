@@ -1,4 +1,4 @@
-﻿namespace RestoRise.BuisnessLogic.Options;
+﻿namespace RestoRise.Application.Options;
 
 public class JwtOptions
 {

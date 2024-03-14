@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RestoRise.BuisnessLogic.DTOs.City;
-using RestoRise.BuisnessLogic.Interfaces;
+using RestoRise.Application.DTOs.City;
+using RestoRise.Application.Interfaces.Services;
+
 
 namespace RestoRise.Api.Controllers;
 

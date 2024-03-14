@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RestoRise.Storage")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4dcff92e5ef75dacdddb6d5e67e127f268383244")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b218372bbc78a2a05c413fc3ee04002dacac4284")]
 [assembly: System.Reflection.AssemblyProductAttribute("RestoRise.Storage")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RestoRise.Storage")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

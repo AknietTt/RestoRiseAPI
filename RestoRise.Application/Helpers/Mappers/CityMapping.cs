@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using RestoRise.BuisnessLogic.DTOs.City;
+using RestoRise.Application.DTOs.City;
 using RestoRise.Domain.Entities;
 
 namespace RestoRise.BuisnessLogic.Helpers.Mappers;

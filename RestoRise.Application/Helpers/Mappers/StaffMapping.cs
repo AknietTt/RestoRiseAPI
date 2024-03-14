@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using RestoRise.Domain.Entities;
 
-namespace RestoRise.BuisnessLogic.Helpers.Mappers;
+namespace RestoRise.Application.Helpers.Mappers;
 
 public class StaffMapping:Profile
 {

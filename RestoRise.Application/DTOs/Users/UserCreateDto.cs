@@ -1,4 +1,4 @@
-﻿namespace RestoRise.BuisnessLogic.DTOs;
+﻿namespace RestoRise.Application.DTOs;
 
 public class UserCreateDto
 {

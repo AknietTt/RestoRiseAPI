@@ -14,7 +14,7 @@ public class Staff:Entity
     public string Gender { get; set; }
     public string? TelegramNick { get; set; }
     
-    public IEnumerable<Role> Roles { get; set; }
+    public ICollection<Role> Roles { get; set; }
     
-    public IEnumerable<Branch> Branches { get; set; }
+    public ICollection<Branch> Branches { get; set; }
 }

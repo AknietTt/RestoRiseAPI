@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using RestoRise.Domain.Common;
 
-namespace RestoRise.BuisnessLogic.ICrudRepository;
+namespace RestoRise.Application.Interfaces.Repositories;
 
 public interface ICrudRepository<TEntity>
     where TEntity : Entity
@@ -13,7 +13,7 @@ public interface ICrudRepository<TEntity>
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, string[]? includeProperties = null);
     Task<bool> Any(Expression<Func<TEntity, bool>> filter);
     Task<int> Count(Expression<Func<TEntity, bool>>? filter = null);
-    Task Delete(Guid id);
+    Task<bool> Delete(Guid id);
     Task DeleteRange(Guid[] ids);
     Task AddAsync(TEntity entity);
     Task AddRangeAsync(TEntity[] entity);

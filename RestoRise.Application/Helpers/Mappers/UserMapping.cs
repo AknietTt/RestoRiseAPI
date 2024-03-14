@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using RestoRise.BuisnessLogic.DTOs;
+using RestoRise.Application.DTOs;
 using RestoRise.Domain.Entities;
 
-namespace RestoRise.BuisnessLogic.Helpers.Mappers;
+namespace RestoRise.Application.Helpers.Mappers;
 
 public class UserMapping:Profile
 {

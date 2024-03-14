@@ -1,4 +1,4 @@
-﻿namespace RestoRise.BuisnessLogic.DTOs;
+﻿namespace RestoRise.Application.DTOs.Restaurant;
 
 public class RestaurantOutputDto
 {
@@ -6,4 +6,5 @@ public class RestaurantOutputDto
     public string Name { get;  set; }
     public string Photo { get; set; }
     public string Description { get; set; }
+    public Guid MenuId { get; set; }
 }

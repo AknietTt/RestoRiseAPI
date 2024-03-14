@@ -1,4 +1,4 @@
-﻿namespace RestoRise.BuisnessLogic.DTOs.Branch;
+﻿namespace RestoRise.Application.DTOs.Branch;
 
 public class BranchCreateDto
 {

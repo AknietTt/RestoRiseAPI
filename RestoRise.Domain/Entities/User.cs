@@ -14,7 +14,7 @@ public class User:Entity
     public string Gender { get; set; }
     public string? TelegramNick { get; set; }
     
-    public IEnumerable<Restaurant>  Restaurants{ get; set; }
+    public ICollection<Restaurant>  Restaurants{ get; set; }
 
    
     

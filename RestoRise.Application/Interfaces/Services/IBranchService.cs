@@ -1,8 +1,7 @@
-﻿using RestoRise.BuisnessLogic.DTOs.Branch;
+﻿using RestoRise.Application.DTOs.Branch;
 using RestoRise.Domain.Common;
 
-namespace RestoRise.BuisnessLogic.Interfaces;
-
+namespace RestoRise.Application.Interfaces.Services;
 public interface IBranchService
 {
     Task<Result<Guid>> CreateBranch(BranchCreateDto dto);

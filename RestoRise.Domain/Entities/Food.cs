@@ -10,5 +10,5 @@ public class Food:Entity
     
     public Menu Menu { get; set; }
     public Category Category { get; set; }
-    public IEnumerable<OrderDetail> OrderDetails { get; set; }
+    public ICollection<OrderDetail> OrderDetails { get; set; }
 }

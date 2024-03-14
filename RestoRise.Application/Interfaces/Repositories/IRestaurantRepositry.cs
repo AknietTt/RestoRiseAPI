@@ -1,7 +1,7 @@
-﻿using RestoRise.BuisnessLogic.DTOs;
+﻿
 using RestoRise.Domain.Entities;
 
-namespace RestoRise.BuisnessLogic.ICrudRepository;
+namespace RestoRise.Application.Interfaces.Repositories;
 
 public interface IRestaurantRepositry:ICrudRepository<Restaurant>
 {

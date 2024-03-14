@@ -1,8 +1,7 @@
-﻿using RestoRise.BuisnessLogic.DTOs;
+﻿using RestoRise.Application.DTOs.Restaurant;
 using RestoRise.Domain.Common;
 
-namespace RestoRise.BuisnessLogic.Interfaces;
-
+namespace RestoRise.Application.Interfaces.Services;
 public interface IRestaurnatService
 {
     Task<Result<IEnumerable<RestaurantOutputDto>>> GetAllRestaurants();

@@ -4,10 +4,10 @@ using System.Text;
 using AutoMapper;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using RestoRise.BuisnessLogic.DTOs;
-using RestoRise.BuisnessLogic.ICrudRepository;
-using RestoRise.BuisnessLogic.Interfaces;
-using RestoRise.BuisnessLogic.Options;
+using RestoRise.Application.DTOs;
+using RestoRise.Application.Interfaces.Repositories;
+using RestoRise.Application.Interfaces.Services;
+using RestoRise.Application.Options;
 using RestoRise.Domain.Common;
 using RestoRise.Domain.Entities;
 

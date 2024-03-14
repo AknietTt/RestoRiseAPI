@@ -2,7 +2,7 @@
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
-using RestoRise.BuisnessLogic.ICrudRepository;
+using RestoRise.Application.Interfaces.Repositories;
 using RestoRise.Domain.Common;
 
 namespace RestoRise.Storage.Repositories;
@@ -112,11 +112,16 @@ public abstract class BaseRepository<TEntity> : ICrudRepository<TEntity>
         await _dbSet.AddRangeAsync(entity);
     }
 
-    public virtual async Task Delete(Guid id)
+    public virtual async Task<bool> Delete(Guid id)
     {
         var entityToDelete = await GetAsync(id);
         if (entityToDelete != null)
+        {
             Delete(entityToDelete);
+            return true;
+        }
+
+        return false;
     }
 
     protected virtual void Delete(TEntity entityToDelete)

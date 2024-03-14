@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using RestoRise.BuisnessLogic.DTOs.Branch;
+using RestoRise.Application.DTOs.Branch;
 using RestoRise.Domain.Entities;
 
-namespace RestoRise.BuisnessLogic.Helpers.Mappers;
+namespace RestoRise.Application.Helpers.Mappers;
 
 public class BranchMapping:Profile
 {

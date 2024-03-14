@@ -11,5 +11,5 @@ public class Order:Entity
     public string PhoneNumber { get; set; }
     
     public Branch Branch { get; set; }
-    public IEnumerable<OrderDetail> OrderDetails { get; set; }
+    public ICollection<OrderDetail> OrderDetails { get; set; }
 }

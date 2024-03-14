@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using RestoRise.BuisnessLogic.DTOs.City;
-using RestoRise.BuisnessLogic.ICrudRepository;
-using RestoRise.BuisnessLogic.Interfaces;
+using RestoRise.Application.DTOs.City;
+using RestoRise.Application.Interfaces.Repositories;
+using RestoRise.Application.Interfaces.Services;
 using RestoRise.Domain.Common;
 using RestoRise.Domain.Entities;
 
 namespace RestoRise.BuisnessLogic.Services;
 
-public class CityService: ICityService
+public class CityService : ICityService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -20,9 +20,9 @@ public class CityService: ICityService
 
     public async Task<Result<IEnumerable<CityDto>>> GetAllCity()
     {
-       var cityRepository = _unitOfWork.GetRepository<City>();
-       var cities =  await cityRepository.GetAsync();
-       return Result<IEnumerable<CityDto>>.Success(_mapper.Map<IEnumerable<CityDto>>(cities));
+        var cityRepository = _unitOfWork.GetRepository<City>();
+        var cities = await cityRepository.GetAsync();
+        return Result<IEnumerable<CityDto>>.Success(_mapper.Map<IEnumerable<CityDto>>(cities));
     }
 
     public async Task<Result<Guid>> CreateCity(string name)
@@ -36,17 +36,10 @@ public class CityService: ICityService
 
     public async Task<Result<bool>> DeleteCity(Guid cityId)
     {
-        try
-        {
-            var cityRepository = _unitOfWork.GetRepository<City>();
-            await cityRepository.Delete(cityId);
-            await _unitOfWork.SaveChangesAsync();
-            return Result<bool>.Success(true);
-        }
-        catch (Exception e)
-        {
-            return Result<bool>.Failure("Ошибка при удалений города, может быть что нет такой id или не правильные данные", 400);
-        }
+        var cityRepository = _unitOfWork.GetRepository<City>();
+        await cityRepository.Delete(cityId);
+        await _unitOfWork.SaveChangesAsync();
+        return Result<bool>.Success(true);
     }
 
     public async Task<Result<CityDto>> UpdateCity(CityDto cityUpdateDto)
@@ -55,15 +48,11 @@ public class CityService: ICityService
         var city = await cityRepository.GetAsync(cityUpdateDto.Id);
 
         city.Name = cityUpdateDto.Name;
-        
+
         cityRepository.Update(city);
-        var res =  await _unitOfWork.SaveChangesAsync();
-        if (res != 0)
-        {
-            return Result<CityDto>.Success(cityUpdateDto);    
-        }
+        var res = await _unitOfWork.SaveChangesAsync();
+        if (res != 0) return Result<CityDto>.Success(cityUpdateDto);
 
         return Result<CityDto>.Failure("Ошибка при сохранений", 400);
-
     }
 }

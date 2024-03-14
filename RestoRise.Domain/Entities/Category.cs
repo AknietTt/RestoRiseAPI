@@ -5,6 +5,6 @@ namespace RestoRise.Domain.Entities;
 public class Category:Entity
 {
     public string Name { get; set; }
-    public IEnumerable<Food> Foods { get; set; }    
+    public ICollection<Food> Foods { get; set; }    
     
 }

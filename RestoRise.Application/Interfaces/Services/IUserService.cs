@@ -1,8 +1,8 @@
 ﻿
-using RestoRise.BuisnessLogic.DTOs;
+using RestoRise.Application.DTOs;
 using RestoRise.Domain.Common;
 
-namespace RestoRise.BuisnessLogic.Interfaces;
+namespace RestoRise.Application.Interfaces.Services;
 
 public interface IUserService
 {

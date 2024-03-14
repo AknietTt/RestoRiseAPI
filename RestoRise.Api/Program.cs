@@ -3,8 +3,9 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using RestoRise.BuisnessLogic;
-using RestoRise.BuisnessLogic.Options;
+using RestoRise.Api.Middleware;
+using RestoRise.Application;
+using RestoRise.Application.Options;
 using RestoRise.Storage;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -83,6 +84,9 @@ builder.Services.AddCors(options => {
 
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseMiddleware<CustomAuthenticationFailureMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment()) {

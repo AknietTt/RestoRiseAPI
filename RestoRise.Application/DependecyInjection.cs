@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RestoRise.BuisnessLogic.Helpers.Mappers;
-using RestoRise.BuisnessLogic.Interfaces;
+using RestoRise.Application.Helpers.Mappers;
+using RestoRise.Application.Interfaces.Services;
 using RestoRise.BuisnessLogic.Services;
 
-namespace RestoRise.BuisnessLogic;
+namespace RestoRise.Application;
 
 public static class DependecyInjection
 {

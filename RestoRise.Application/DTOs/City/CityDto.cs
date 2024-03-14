@@ -1,4 +1,4 @@
-﻿namespace RestoRise.BuisnessLogic.DTOs.City;
+﻿namespace RestoRise.Application.DTOs.City;
 
 public class CityDto
 {
