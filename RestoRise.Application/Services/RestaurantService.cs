@@ -52,7 +52,7 @@ public class RestaurantService : IRestaurnatService
         await restaurantRepository.AddAsync(restaurant);
         await _unitOfWork.SaveChangesAsync();
 
-        return Result<Guid>.Success(restaurant.Id, 200);
+        return Result<Guid>.Success(restaurant.Id, 201);
     }
 
     public async Task<Result<RestaurnatUpdateDto>> UpdateRestaurant(RestaurnatUpdateDto restaurnatUpdateDto)
@@ -66,7 +66,7 @@ public class RestaurantService : IRestaurnatService
 
         restaurantRepository.Update(restaurant);
         await _unitOfWork.SaveChangesAsync();
-        return Result<RestaurnatUpdateDto>.Success(restaurnatUpdateDto, 201);
+        return Result<RestaurnatUpdateDto>.Success(restaurnatUpdateDto, 200);
     }
 
     public async Task<Result<bool>> Delete(Guid id)

@@ -18,6 +18,8 @@ public static class DependecyInjection
 
         services.AddScoped<ICityService, CityService>();
         services.AddScoped<IBranchService, BranchService>();
+
+        services.AddScoped<IFoodService, FoodService>();
         return services;
     }
 }

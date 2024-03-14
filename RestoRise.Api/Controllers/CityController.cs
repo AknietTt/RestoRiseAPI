@@ -41,17 +41,7 @@ public class CityController:ControllerBase
         return Ok(res);
     }
 
-    [HttpDelete("delete")]
-    public async Task<IActionResult> DeleteCity([FromQuery] Guid cityId)
-    {
-        var res = await _cityService.DeleteCity(cityId);
-        if (!res.IsSuccess)
-        {
-            return BadRequest(res);
-        }
-        return Ok(res);
-    }
-
+    
     [HttpPut("update/id")]
     public async Task<IActionResult> UpdateCity(Guid id , [FromBody] CityDto cityUpdateDto)
     {
@@ -69,4 +59,19 @@ public class CityController:ControllerBase
         return BadRequest("Не совпадает id DTO и id из параметра");
 
     }
+    
+   
+    
+    [HttpDelete("delete/{id}")]
+    public async Task<IActionResult> DeleteCity(Guid id)
+    {
+        var res = await _cityService.DeleteCity(id);
+        if (!res.IsSuccess)
+        {
+            return BadRequest(res);
+        }
+        return Ok(res);
+    }
+
+    
 }

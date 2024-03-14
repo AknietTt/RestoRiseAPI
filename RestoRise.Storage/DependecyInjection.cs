@@ -32,6 +32,12 @@ public static  class DependecyInjection
         services.AddScoped<IBranchRepository, BranchRepository>();
         services.AddScoped<ICrudRepository<Branch>, BranchRepository>();
         
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<ICrudRepository<Category>, CategoryRepository>();
+
+        services.AddScoped<IFoodRepository, FoodRepository>();
+        services.AddScoped<ICrudRepository<Food>, FoodRepository>();
+
         return services;
     }
 }
