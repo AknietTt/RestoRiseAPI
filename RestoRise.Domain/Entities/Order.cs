@@ -9,7 +9,6 @@ public class Order:Entity
     public string Address { get; set; }
     public string NameCustomer { get; set; }
     public string PhoneNumber { get; set; }
-    
     public Branch Branch { get; set; }
     public ICollection<OrderDetail> OrderDetails { get; set; }
 }

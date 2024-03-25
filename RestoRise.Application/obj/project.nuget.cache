@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "U2Bd23Z24Nsocv7LtI2q7X+VowAt99qq914xuft9j+26IHU/7WA7qC2p4MarC++FDDJV9iHXhFvvWCxJUEn5IA==",
+  "dgSpecHash": "JLowUMsJSS93r/L+M9nzovwMCOap/K8oTJYMRL6W+ZczQHblpVwgyU2uWMWRKU6E+sYOFryV38RH+Olijc79Fw==",
   "success": true,
   "projectFilePath": "C:\\HW\\С#\\RestoRise\\RestoRise.Application\\RestoRise.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\77762\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
+    "C:\\Users\\77762\\.nuget\\packages\\awssdk.core\\3.7.302.20\\awssdk.core.3.7.302.20.nupkg.sha512",
+    "C:\\Users\\77762\\.nuget\\packages\\awssdk.s3\\3.7.307\\awssdk.s3.3.7.307.nupkg.sha512",
     "C:\\Users\\77762\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\77762\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.2\\microsoft.entityframeworkcore.8.0.2.nupkg.sha512",
     "C:\\Users\\77762\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.2\\microsoft.entityframeworkcore.abstractions.8.0.2.nupkg.sha512",

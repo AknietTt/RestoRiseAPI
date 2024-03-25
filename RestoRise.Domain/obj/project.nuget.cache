@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "OyBP87mLoA2k/tF+PhHIfxO8QapU9k+rpTMB0C69CP+mFUk3Ni3H9eYiSPP6VkRWbtiHRo4iJx+evHWsPiz81Q==",
+  "dgSpecHash": "7ej047GJSzK+K9gx7ZaUcMFrj9sP6ECbqhX7XGcbpoEOkbkiBjjduPALQpKItp4xxsZdKBLIzUi+iDS4OL1syA==",
   "success": true,
   "projectFilePath": "C:\\HW\\С#\\RestoRise\\RestoRise.Domain\\RestoRise.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\77762\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
+    "C:\\Users\\77762\\.nuget\\packages\\awssdk.core\\3.7.302.20\\awssdk.core.3.7.302.20.nupkg.sha512",
+    "C:\\Users\\77762\\.nuget\\packages\\awssdk.s3\\3.7.307\\awssdk.s3.3.7.307.nupkg.sha512",
     "C:\\Users\\77762\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\77762\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\77762\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.3.3\\microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",

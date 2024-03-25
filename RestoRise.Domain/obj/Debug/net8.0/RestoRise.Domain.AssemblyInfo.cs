@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RestoRise.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b218372bbc78a2a05c413fc3ee04002dacac4284")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3d68d14e5c0123655efad813a1405fe0822ad58")]
 [assembly: System.Reflection.AssemblyProductAttribute("RestoRise.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RestoRise.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

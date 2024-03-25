@@ -45,6 +45,8 @@ builder.Services.AddSwaggerGen(c => {
     });
 });
 
+
+
 builder.Services.ImplementPersistence(configuration);
 builder.Services.ImplementService(configuration);
 
