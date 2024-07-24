@@ -38,6 +38,16 @@ public class AuthController:ControllerBase
 
         return Ok(result);
     }
-    
 
+    [HttpGet("info/{userId}")]
+    public async Task<IActionResult> GetUserInfo(Guid userId)
+    {
+        var result = await _userService.GetUserInfo(userId);
+        if (!result.IsSuccess)
+        {
+            return BadRequest(result);
+        }
+
+        return Ok(result);
+    }
 }

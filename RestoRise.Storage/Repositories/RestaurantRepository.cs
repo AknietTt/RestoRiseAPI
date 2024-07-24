@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using RestoRise.Application.Interfaces.Repositories;
 using RestoRise.Domain.Entities;
 
@@ -10,4 +11,13 @@ public class RestaurantRepository:BaseRepository<Restaurant>, IRestaurantReposit
     {
     }
 
+    public async Task<ICollection<Restaurant>> GetRestaurantsByCity(Guid cityId)
+    {
+        var restaurants = await _context.Restaurants
+            .Include(r => r.Branches).ThenInclude(b=>b.City)
+            .Where(r => r.Branches.Any(b => b.City.Id == cityId))
+            .ToListAsync();
+
+        return restaurants;
+    }
 }

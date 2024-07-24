@@ -25,10 +25,7 @@ public static  class DependecyInjection
 
         services.AddScoped<ICityRepository, CityRepository>();
         services.AddScoped<ICrudRepository<City>, CityRepository>();
-
-        services.AddScoped<IMenuRepository, MenuRepository>();
-        services.AddScoped<ICrudRepository<Menu>, MenuRepository>();
-
+        
         services.AddScoped<IBranchRepository, BranchRepository>();
         services.AddScoped<ICrudRepository<Branch>, BranchRepository>();
         
@@ -37,6 +34,13 @@ public static  class DependecyInjection
 
         services.AddScoped<IFoodRepository, FoodRepository>();
         services.AddScoped<ICrudRepository<Food>, FoodRepository>();
+        
+        services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<ICrudRepository<Order>, OrderRepository>();
+
+        
+        services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+        services.AddScoped<ICrudRepository<OrderDetail>, OrderDetailRepository>();
 
         return services;
     }

@@ -2,7 +2,7 @@
 
 namespace RestoRise.Application.Interfaces.Repositories;
 
-public interface IMenuRepository:ICrudRepository<Menu>
+public interface IOrderDetailRepository:ICrudRepository<OrderDetail>
 {
     
 }

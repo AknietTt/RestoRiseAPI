@@ -8,8 +8,8 @@ public class Restaurant:Entity
     public string Photo { get; set; }
     public string Description { get; set; }
     public User Owner { get; set; }
-    public Menu? Menu { get; set; }
     public ICollection<Branch> Branches { get; set; }
+    public ICollection<Food> Foods { get; set; }
     
     
 }

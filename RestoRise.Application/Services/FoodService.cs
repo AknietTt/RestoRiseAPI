@@ -7,10 +7,11 @@ using RestoRise.Domain.Entities;
 
 namespace RestoRise.BuisnessLogic.Services;
 
-public class FoodService: IFoodService
+public class FoodService : IFoodService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+
     public FoodService(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
@@ -20,11 +21,8 @@ public class FoodService: IFoodService
     public async Task<Result<FoodCreateDto>> CraeteFood(FoodCreateDto dto)
     {
         var foodRepository = _unitOfWork.GetRepository<Food>();
-        var menuRepository = _unitOfWork.GetRepository<Menu>();
         var categoryRepository = _unitOfWork.GetRepository<Category>();
-
-        var menu = await menuRepository.GetAsync(dto.MenuId);
-        menuRepository.Attach(menu);
+        var restaurantRepository = _unitOfWork.GetRepository<Restaurant>();
 
         var categoryName = dto.Category.Trim();
         var category = await categoryRepository.FirstOrDefault(x => x.Name == categoryName);
@@ -34,18 +32,21 @@ public class FoodService: IFoodService
             category = new Category { Name = categoryName };
             await categoryRepository.AddAsync(category);
         }
-        if (category != null)
+        else
         {
             categoryRepository.Attach(category);
         }
 
-        var food = new Food()
+        var restaurant = await restaurantRepository.FirstOrDefault(x => x.Id == dto.RestaurantId);
+        restaurantRepository.Attach(restaurant);
+        var food = new Food
         {
-            Menu = menu,
             Name = dto.Name,
             Photo = dto.Photo,
             Price = dto.Price,
-            Category = category
+            Restaurant = restaurant,
+            Category = category,
+            Description = dto.Description
         };
 
         await foodRepository.AddAsync(food);
@@ -54,25 +55,41 @@ public class FoodService: IFoodService
         return Result<FoodCreateDto>.Success(dto, 201);
     }
 
-    public async Task<Result<IEnumerable<FoodOutputDto>>> GetFoodsByRestaurant(Guid restaurnatId)
+    public async Task<Result<IEnumerable<MenuOutputDto>>> GetFoodsByRestaurant(Guid restaurnatId)
     {
-        var restaurant =  await _unitOfWork.GetRepository<Restaurant>().FirstOrDefault(x => x.Id == restaurnatId, includeProperties: new []{"Menu"});
-        if (restaurant == null)
+        if (!await _unitOfWork.GetRepository<Restaurant>().Any(x => x.Id == restaurnatId))
+            return Result<IEnumerable<MenuOutputDto>>.Failure("Ресторан не найден, такого ресторана нет", 404);
+    
+        var foods = await _unitOfWork.GetRepository<Food>()
+            .GetAsync(
+                x => x.Restaurant.Id == restaurnatId, 
+                x => x.OrderBy(o => o.Category),
+                includeProperties:new [] {"Category"}
+                );
+
+        var groupedFoods = foods.GroupBy(f => f.Category.Name);
+
+        var menus = new List<MenuOutputDto>();
+
+        foreach (var group in groupedFoods)
         {
-            return Result<IEnumerable<FoodOutputDto>>.Failure("Ресторан не найден , такого ресторана нет ", 404);
+            var menu = new MenuOutputDto
+            {
+                CategoryName = group.Key,
+                Foods = _mapper.Map<ICollection<FoodOutputDto>>(group)
+            };
+            menus.Add(menu);
         }
-        var foods = await _unitOfWork.GetRepository<Food>().GetAsync(filter: x => x.Menu.Id == restaurant.Menu.Id);
-        var result = _mapper.Map<IEnumerable<FoodOutputDto>>(foods);
-        return Result<IEnumerable<FoodOutputDto>>.Success(result, 200);
+
+        return Result<IEnumerable<MenuOutputDto>>.Success(menus, 200);
     }
+
 
     public async Task<Result<bool>> DeleteFood(Guid id)
     {
         var foodRepository = _unitOfWork.GetRepository<Food>();
         if (!await foodRepository.Any(x => x.Id == id))
-        {
             return Result<bool>.Failure("Такой еды нет , не правильный id", 404);
-        }
         await foodRepository.Delete(id);
         _unitOfWork.SaveChangesAsync();
         return Result<bool>.Success(true);
@@ -80,35 +97,29 @@ public class FoodService: IFoodService
 
     public async Task<Result<FoodUpdateDto>> UpdateFood(FoodUpdateDto dto)
     {
-       var foodRepository = _unitOfWork.GetRepository<Food>();
-       var categoryRepository = _unitOfWork.GetRepository<Category>();
-       
-       var food =  await foodRepository.GetAsync(dto.Id);
+        var foodRepository = _unitOfWork.GetRepository<Food>();
+        var categoryRepository = _unitOfWork.GetRepository<Category>();
 
-       if (food == null)
-       {
-           return Result<FoodUpdateDto>.Failure("Такой еды нет , ошибка возможно нет такой Id", 404);
-       }
-       var category = await categoryRepository.FirstOrDefault(c => c.Name == dto.Category);
+        var food = await foodRepository.GetAsync(dto.Id);
 
-       if (category != null)
-       {
-           categoryRepository.Attach(category);
-       }
-       if (category == null)
-       {
-           category = new Category(){ Name = dto.Category };
-           await categoryRepository.AddAsync(category);
-       }
-       
-       food.Category = category;
-       food.Name = dto.Name;
-       food.Price = dto.Price;
-       food.Photo = dto.Photo;
-       
-       foodRepository.Update(food);
-        
-       await _unitOfWork.SaveChangesAsync();
-       return Result<FoodUpdateDto>.Success(dto);
+        if (food == null) return Result<FoodUpdateDto>.Failure("Такой еды нет , ошибка возможно нет такой Id", 404);
+        var category = await categoryRepository.FirstOrDefault(c => c.Name == dto.Category);
+
+        if (category != null) categoryRepository.Attach(category);
+        if (category == null)
+        {
+            category = new Category { Name = dto.Category };
+            await categoryRepository.AddAsync(category);
+        }
+
+        food.Category = category;
+        food.Name = dto.Name;
+        food.Price = dto.Price;
+        food.Photo = dto.Photo;
+
+        foodRepository.Update(food);
+
+        await _unitOfWork.SaveChangesAsync();
+        return Result<FoodUpdateDto>.Success(dto);
     }
 }

@@ -9,10 +9,8 @@ public class RestaurantConfiguration:IEntityTypeConfiguration<Restaurant>
     public void Configure(EntityTypeBuilder<Restaurant> builder)
     {
 
-        builder
-            .HasOne(m => m.Menu)
-            .WithMany(r => r.Restaurants);
-        
+        builder.HasMany(f => f.Foods).WithOne(r => r.Restaurant);
+        builder.HasMany(f => f.Foods).WithOne(r => r.Restaurant);
            builder
                .HasOne(o => o.Owner)
                .WithMany(r => r.Restaurants);

@@ -11,13 +11,15 @@ public class RestaurantService : IRestaurnatService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IUserRepository _userRepository;
+    private readonly IRestaurantRepositry _restaurantRepositry;
     private readonly IMapper _mapper;
 
-    public RestaurantService(IUnitOfWork unitOfWork, IMapper mapper, IUserRepository userRepository)
+    public RestaurantService(IUnitOfWork unitOfWork, IMapper mapper, IUserRepository userRepository, IRestaurantRepositry restaurantRepositry)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
         _userRepository = userRepository;
+        _restaurantRepositry = restaurantRepositry;
     }
 
     public async Task<Result<IEnumerable<RestaurantOutputDto>>> GetAllRestaurants()
@@ -30,9 +32,10 @@ public class RestaurantService : IRestaurnatService
         return Result<IEnumerable<RestaurantOutputDto>>.Success(result, 200);
     }
 
-    public Task<Result<IEnumerable<RestaurantOutputDto>>> GetAllRestaurants(Guid id)
+    public async Task<Result<IEnumerable<RestaurantOutputDto>>> GetAllRestaurants(Guid id)
     {
-        throw new NotImplementedException();
+       var restaurants =  _mapper.Map<IEnumerable<RestaurantOutputDto>>(await _restaurantRepositry.GetRestaurantsByCity(id));
+       return Result<IEnumerable<RestaurantOutputDto>>.Success(restaurants);
     }
 
     public async Task<Result<Guid>> CreateRestaurant(RestaurantCreateDto restaurantCreateDto)
@@ -44,7 +47,7 @@ public class RestaurantService : IRestaurnatService
         if (owner == null) return Result<Guid>.Failure("Пользователь не найден", 404);
 
         var restaurant = _mapper.Map<Restaurant>(restaurantCreateDto);
-        restaurant.Menu = new Menu();
+        
         
         userRepository.Attach(owner);
         restaurant.Owner = owner;
@@ -55,7 +58,7 @@ public class RestaurantService : IRestaurnatService
         return Result<Guid>.Success(restaurant.Id, 201);
     }
 
-    public async Task<Result<RestaurnatUpdateDto>> UpdateRestaurant(RestaurnatUpdateDto restaurnatUpdateDto)
+    public async Task<Result<RestaurantUpdateDto>> UpdateRestaurant(RestaurantUpdateDto restaurnatUpdateDto)
     {
         var restaurantRepository = _unitOfWork.GetRepository<Restaurant>();
         var restaurant = await restaurantRepository.GetAsync(restaurnatUpdateDto.Id);
@@ -66,7 +69,7 @@ public class RestaurantService : IRestaurnatService
 
         restaurantRepository.Update(restaurant);
         await _unitOfWork.SaveChangesAsync();
-        return Result<RestaurnatUpdateDto>.Success(restaurnatUpdateDto, 200);
+        return Result<RestaurantUpdateDto>.Success(restaurnatUpdateDto, 200);
     }
 
     public async Task<Result<bool>> Delete(Guid id)
@@ -79,5 +82,17 @@ public class RestaurantService : IRestaurnatService
 
         await _unitOfWork.SaveChangesAsync();
         return Result<bool>.Success(true);
+    }
+
+    public async Task<Result<IEnumerable<RestaurantOutputDto>>> GetRestaurantsByOwner(Guid ownerId)
+    {
+        var restaurants =   _mapper.Map<IEnumerable<RestaurantOutputDto>>(await _restaurantRepositry.GetAsync(x=>x.Owner.Id == ownerId));
+        return Result<IEnumerable<RestaurantOutputDto>>.Success(restaurants);
+    }
+
+    public async Task<Result<RestaurantUpdateDto>> GetRestaurantById(Guid id)
+    {
+      var restaurant =  await _restaurantRepositry.FirstOrDefault(x => x.Id == id);
+      return Result<RestaurantUpdateDto>.Success( _mapper.Map<RestaurantUpdateDto>(restaurant), 200);
     }
 }

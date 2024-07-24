@@ -8,11 +8,9 @@ public class RestaurantMapping: Profile
 {
     public RestaurantMapping()
     {
-        CreateMap<Restaurant, Restaurant>()
-            .ForMember(dest => dest.Menu, opt => opt.MapFrom(src => src.Menu));
-        
+        CreateMap<Restaurant, Restaurant>();
+        CreateMap<Restaurant, RestaurantUpdateDto>().ReverseMap();
         CreateMap<Restaurant, RestaurantCreateDto>().ReverseMap();
-        CreateMap<Restaurant, RestaurantOutputDto>()
-            .ForMember(dest => dest.MenuId, opt => opt.MapFrom(src => src.Menu.Id));
+        CreateMap<Restaurant, RestaurantOutputDto>();
     }
 }

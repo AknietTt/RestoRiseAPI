@@ -29,7 +29,7 @@ public abstract class BaseRepository<TEntity> : ICrudRepository<TEntity>
     // }
     public async Task<TEntity?> GetAsync(Guid id, params Expression<Func<TEntity, object>>[] includeProperties)
     {
-        var query = _dbSet.AsNoTracking().AsQueryable();
+        var query = _dbSet.AsQueryable();
 
         if (includeProperties != null)
         {
@@ -56,18 +56,28 @@ public abstract class BaseRepository<TEntity> : ICrudRepository<TEntity>
         return await query.FirstOrDefaultAsync();
     }
 
-    public async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>>? filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, string[]? includeProperties = null)
+    Task<IEnumerable<TEntity>> ICrudRepository<TEntity>.GetAsync(Expression<Func<TEntity, bool>>? filter, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy, string[]? includeProperties)
     {
-        IQueryable<TEntity> query = _dbSet.AsNoTracking();
+        return GetAsync(filter, orderBy, includeProperties);
+    }
+
+    private async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>>? filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, string[]? includeProperties = null)
+    {
+        // IQueryable<TEntity> query = _dbSet.AsNoTracking();
+        IQueryable<TEntity> query = _dbSet.AsQueryable();
 
         if (filter != null)
         {
             query = query.Where(filter);
         }
 
-        if (includeProperties is { Length: > 0 })
+        
+        if (includeProperties != null)
         {
-            query = query.ProjectTo<TEntity>(_mapper.ConfigurationProvider, null, includeProperties);
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
         }
 
         if (orderBy != null)
@@ -156,6 +166,25 @@ public abstract class BaseRepository<TEntity> : ICrudRepository<TEntity>
 
     public void Attach(TEntity entity)
     {
-        _dbSet.Attach(entity);
+        var existingEntity = _context.ChangeTracker.Entries<TEntity>()
+            .FirstOrDefault(e => e.Entity.Id == entity.Id);
+        
+        if (existingEntity == null)
+        {
+            // Attach the entity if it is not already tracked
+            _dbSet.Attach(entity);
+        }
+    }
+
+    public async Task<TEntity?> GetWithIncludesAsync(Guid id, params Expression<Func<TEntity, object>>[] includeProperties)
+    {
+        var query = _dbSet.AsQueryable();
+
+        if (includeProperties != null)
+        {
+            query = includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
+        }
+
+        return await query.FirstOrDefaultAsync(x => x.Id == id);
     }
 }

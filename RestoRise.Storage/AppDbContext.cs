@@ -12,7 +12,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options): DbContext(opt
         modelBuilder.ApplyConfiguration(new CategoryConfiguration());
         modelBuilder.ApplyConfiguration(new CityConfiguration());
         modelBuilder.ApplyConfiguration(new FoodConfiguration());
-        modelBuilder.ApplyConfiguration(new MenuConfiguration());
         modelBuilder.ApplyConfiguration(new OrderConfiguration());
         modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
         modelBuilder.ApplyConfiguration(new RestaurantConfiguration());
@@ -29,7 +28,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options): DbContext(opt
     public DbSet<Branch> Branches { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Food> Foods { get; set; }
-    public DbSet<Menu> Menus { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderDetail> OrderDetails { get; set; }
     public DbSet<Restaurant> Restaurants { get; set; }

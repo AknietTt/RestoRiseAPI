@@ -14,9 +14,7 @@ public class FoodConfiguration:IEntityTypeConfiguration<Food>
             .HasOne(c => c.Category)
             .WithMany(f => f.Foods);
 
-        builder
-            .HasOne(m => m.Menu)
+        builder.HasOne(r => r.Restaurant)
             .WithMany(r => r.Foods);
-
     }
 }

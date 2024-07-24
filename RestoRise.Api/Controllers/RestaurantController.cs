@@ -8,7 +8,7 @@ namespace RestoRise.Api.Controllers.Restaurants;
 
 [Authorize(AuthenticationSchemes = "Bearer")]
 [ApiController]
-[Route("restaurnat")]
+[Route("restaurant")]
 public class RestaurantController:ControllerBase
 {
     private readonly IRestaurnatService _restaurnatService;
@@ -19,11 +19,24 @@ public class RestaurantController:ControllerBase
     }
 
     #region GET
-
-    [HttpGet("all/cityId")]
+    [AllowAnonymous]
+    [HttpGet("all/{cityId}")]
     public async Task<IActionResult> GetAll(Guid cityId)
     {
         var result = await _restaurnatService.GetAllRestaurants(cityId);
+        if (result.IsSuccess)
+        {
+            return Ok(result);
+        }
+        else
+        {
+            return BadRequest(result);
+        }
+    }
+    [HttpGet("{ownerId}")]
+    public async Task<IActionResult> GetByOwner(Guid ownerId)
+    {
+        var result = await _restaurnatService.GetRestaurantsByOwner(ownerId);
         if (result.IsSuccess)
         {
             return Ok(result);
@@ -48,6 +61,20 @@ public class RestaurantController:ControllerBase
         }
     }
 
+    [HttpGet("get/{id}")]
+    public async Task<IActionResult> Get(Guid id)
+    {
+        var result = await _restaurnatService.GetRestaurantById(id);
+        
+        if (result.IsSuccess)
+        {
+            return Ok(result);
+        }
+        else
+        {
+            return BadRequest(result);
+        }
+    }
     #endregion
 
     #region POST
@@ -68,7 +95,7 @@ public class RestaurantController:ControllerBase
 
     #region PUT
     [HttpPut("update/{id}")]
-    public async Task<IActionResult> Update([FromBody] RestaurnatUpdateDto restaurnatUpdateDto, Guid id )
+    public async Task<IActionResult> Update([FromBody] RestaurantUpdateDto restaurnatUpdateDto, Guid id )
     {
         if (restaurnatUpdateDto.Id != id)
         {

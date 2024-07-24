@@ -1,6 +1,6 @@
 ﻿namespace RestoRise.Application.DTOs.Restaurant;
 
-public class RestaurnatUpdateDto
+public class RestaurantUpdateDto
 {
     public Guid Id { get; set; }
     public string Name { get; set; }

@@ -8,6 +8,7 @@ public class FoodMapping:Profile
 {
     public FoodMapping()
     {
+        CreateMap<Food, Food>();
         CreateMap<Food, FoodOutputDto>().ReverseMap();
     }
 }

@@ -14,6 +14,11 @@ public class FileController:ControllerBase
 {
     private readonly IFileService _fileService;
    
+    private const string bucketName = "foods";
+    private const string serviceURL = "https://object.pscloud.io";
+    private const string accessKey = "6H1AP5R8B3S5U1E42RA7";
+    private const string secretKey = "wy8gb4VRTxTubejv08KgZBBOIVASzzxdVlkcRQkH";
+    
     [HttpPost("upload")]
     public async Task<IActionResult> UploadImage(IFormFile image)
     {
@@ -21,22 +26,32 @@ public class FileController:ControllerBase
         {
             return BadRequest("Файл не был загружен.");
         }
-        string bucketName = "foods";
+
         var config = new AmazonS3Config
         {
-            ServiceURL = "https://object.pscloud.io"
+            ServiceURL = serviceURL
         };
-        using var client = new AmazonS3Client("6H1AP5R8B3S5U1E42RA7", "wy8gb4VRTxTubejv08KgZBBOIVASzzxdVlkcRQkH", config);
-        string keyName = "foods/" + image.FileName;
+
+        using var client = new AmazonS3Client(accessKey, secretKey, config);
+        
+        // Генерируем уникальное имя для файла
+        string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
+        string keyName = "foods/" + uniqueFileName;
+
         try
         {
             using (var newMemoryStream = new MemoryStream())
             {
                 await image.CopyToAsync(newMemoryStream);
+
                 var fileTransferUtility = new TransferUtility(client);
                 await fileTransferUtility.UploadAsync(newMemoryStream, bucketName, keyName);
             }
-            return Ok("Файл успешно загружен.");
+
+            // Генерируем URL для загруженного изображения
+            string imageUrl = $"https://foods.object.pscloud.io/{bucketName}/{uniqueFileName}";
+
+            return Ok(new { Url = imageUrl });
         }
         catch (AmazonS3Exception e)
         {

@@ -7,4 +7,6 @@ public class FoodUpdateDto
     public double Price { get; set; }
     public string Photo { get; set; }
     public string Category { get; set; }
+    public string Description { get; set; }
+
 }

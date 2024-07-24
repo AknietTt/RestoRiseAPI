@@ -27,7 +27,8 @@ public class MenuController:ControllerBase
         }
         return BadRequest(result);
     }
-
+    
+    [AllowAnonymous]
     [HttpGet("food")]
     public async Task<IActionResult> GetFoodByRestaurant([FromQuery] Guid restaurnatId)
     {

@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using RestoRise.Domain.Common;
+using RestoRise.Domain.Entities;
 
 namespace RestoRise.Application.Interfaces.Repositories;
 
@@ -19,5 +20,5 @@ public interface ICrudRepository<TEntity>
     Task AddRangeAsync(TEntity[] entity);
     void Update(TEntity entityToUpdate);
     void Attach(TEntity entity);
-
+    Task<TEntity?> GetWithIncludesAsync(Guid id, params Expression<Func<TEntity, object>>[] includeProperties);
 }

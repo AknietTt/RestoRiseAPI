@@ -43,20 +43,35 @@ public class UserService: IUserService
         return Result<Guid>.Success(userSave.Id, 201);
     }
 
-    public async Task<Result<string>> Authorize(LoginDto loginDto)
+    public async Task<Result<object>> Authorize(LoginDto loginDto)
     {
         var userRepository = _unitOfWork.GetRepository<User>();
         var user = await userRepository.FirstOrDefault(x => x.Email == loginDto.Email);
         if (user == null)
-            return Result<string>.Failure("Данный пользователь не аутентифицирован в системе", 404);
+            return Result<object>.Failure("Данный пользователь не аутентифицирован в системе", 404);
         
         if (BCrypt.Net.BCrypt.Verify(loginDto.Password, user.Password) == false)
-            return Result<string>.Failure("Данный пользователь не аутентифицирован в системе", 404);
+            return Result<object>.Failure("Данный пользователь не аутентифицирован в системе", 404);
         
-        return Result<string>.Success(GenerateToken(user));
+        return Result<object>.Success( new
+        {
+            token=GenerateToken(user),
+            userId= user.Id
+        });
 
     }
-    
+
+    public async Task<Result<UserDto>> GetUserInfo(Guid userId)
+    {
+        var user = await  _unitOfWork.GetRepository<User>().FirstOrDefault(x => x.Id == userId);
+        if (user == null)
+        {
+            return Result<UserDto>.Failure("Пользователь не найдено", 404);
+        }
+
+        return Result<UserDto>.Success( _mapper.Map<UserDto>(user));
+    }
+
     private string GenerateToken(User user)
     {
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.Value.Key));
