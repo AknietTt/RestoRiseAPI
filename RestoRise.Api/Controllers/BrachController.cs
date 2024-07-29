@@ -72,12 +72,24 @@ public class BrachController:ControllerBase
         }
     }
     
-    
-    
     [HttpGet("restaurant/{restaurantId}")]
     public async Task<IActionResult> GetByRestaurantId(Guid restaurantId)
     {
         var result = await _branchService.GetByRestaurant(restaurantId);
+        if (result.IsSuccess)
+        {
+            return Ok(result);
+        }
+        else
+        {
+            return BadRequest(result);
+        }
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(Guid id)
+    {
+        var result = await _branchService.GetBranchById(id);
         if (result.IsSuccess)
         {
             return Ok(result);

@@ -9,6 +9,7 @@ public class BranchMapping:Profile
     public BranchMapping()
     { 
         //CreateMap<Branch, Branch>();
+        CreateMap<Branch, BranchUpdateDto>().ReverseMap();
         CreateMap<Branch, Branch>()
             .ForMember(dest => dest.Staves, opt => opt.MapFrom(src => src.Staves));
         CreateMap<BranchCreateDto, Branch>().ReverseMap();

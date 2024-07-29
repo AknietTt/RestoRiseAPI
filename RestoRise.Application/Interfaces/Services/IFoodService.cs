@@ -9,4 +9,5 @@ public interface IFoodService
     Task<Result<IEnumerable<MenuOutputDto>>> GetFoodsByRestaurant(Guid restaurnatId);
     Task<Result<bool>> DeleteFood(Guid id);
     Task<Result<FoodUpdateDto>> UpdateFood(FoodUpdateDto dto);
+    Task<Result<FoodOutputDto>> GetFoodById(Guid id);
 }

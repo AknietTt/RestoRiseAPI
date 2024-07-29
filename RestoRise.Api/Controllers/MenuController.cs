@@ -40,6 +40,17 @@ public class MenuController:ControllerBase
         return BadRequest(result);
     }
 
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetFood(Guid id )
+    {
+        var result = await _foodService.GetFoodById(id);
+        if (result.IsSuccess)
+        {
+            return Ok(result);
+        }
+        return BadRequest(result);
+    }
+
     [HttpPut("food/update/{id}")]
     public async Task<IActionResult> UpdateFood([FromBody] FoodUpdateDto dto , Guid id)
     {

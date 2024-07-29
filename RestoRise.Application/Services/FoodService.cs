@@ -122,4 +122,10 @@ public class FoodService : IFoodService
         await _unitOfWork.SaveChangesAsync();
         return Result<FoodUpdateDto>.Success(dto);
     }
+
+    public async Task<Result<FoodOutputDto>> GetFoodById(Guid id)
+    {
+       var food = await _unitOfWork.GetRepository<Food>().FirstOrDefault(x => x.Id == id);
+       return Result<FoodOutputDto>.Success( _mapper.Map<FoodOutputDto>(food));
+    }
 }
