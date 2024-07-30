@@ -9,6 +9,9 @@ public class FoodMapping:Profile
     public FoodMapping()
     {
         CreateMap<Food, Food>();
+        CreateMap<Food, FoodUpdateDto>()
+            .ForMember(dest=>dest.Category , opt=>opt.MapFrom(src=>src.Category.Name))
+            .ReverseMap();
         CreateMap<Food, FoodOutputDto>().ReverseMap();
     }
 }

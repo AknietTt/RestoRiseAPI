@@ -123,9 +123,9 @@ public class FoodService : IFoodService
         return Result<FoodUpdateDto>.Success(dto);
     }
 
-    public async Task<Result<FoodOutputDto>> GetFoodById(Guid id)
+    public async Task<Result<FoodUpdateDto>> GetFoodById(Guid id)
     {
-       var food = await _unitOfWork.GetRepository<Food>().FirstOrDefault(x => x.Id == id);
-       return Result<FoodOutputDto>.Success( _mapper.Map<FoodOutputDto>(food));
+       var food = await _unitOfWork.GetRepository<Food>().FirstOrDefault(x => x.Id == id, includeProperties:new [] {"Category"});
+       return Result<FoodUpdateDto>.Success( _mapper.Map<FoodUpdateDto>(food));
     }
 }
