@@ -1,4 +1,5 @@
 ﻿using RestoRise.Domain.Common;
+using RestoRise.Domain.Enums;
 
 namespace RestoRise.Domain.Entities;
 
@@ -14,4 +15,6 @@ public class Order:Entity
     public string Comment { get; set; }
     public Branch Branch { get; set; }
     public ICollection<OrderDetail> OrderDetails { get; set; }
+    public OrderStatus Status { get; set; } 
+
 }

@@ -72,7 +72,15 @@ builder.Services.AddAuthentication(options => {
 
     };
 });
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(
+    opt =>
+    {
+        opt.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
+        opt.AddPolicy("OwnerPolicy", policy => policy.RequireRole("Owner"));
+        opt.AddPolicy("StaffPolicy", policy => policy.RequireRole("Staff"));
+        opt.AddPolicy("CourierPolicy", policy => policy.RequireRole("Courier"));
+    }
+    );
 
 builder.Services.AddCors(options => {
     options.AddDefaultPolicy(

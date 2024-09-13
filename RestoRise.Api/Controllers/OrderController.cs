@@ -29,10 +29,32 @@ public class OrderController:ControllerBase
         return BadRequest(result);
     }
 
-    [HttpGet("owner/{ownerId}")]
-    public async Task<IActionResult> GetOredersByOwner(Guid ownerId)
+    [HttpGet("{ownerId}/{statusCode}")]
+    public async Task<IActionResult> GetOredersByUserId(Guid ownerId, int statusCode)
     {
-        var result = await _orderService.GetOredersByOwner(ownerId);
+        var result = await _orderService.GetOrdersByUserId(ownerId, statusCode);
+        if (result.IsSuccess)
+        {
+            return Ok(result);
+        }
+        return BadRequest(result);
+    }
+
+    [HttpGet("detail/{orderId}")]
+    public async Task<IActionResult> GetOrderDetail(Guid orderId)
+    {
+        var result = await _orderService.GetOrderDetail(orderId);
+        if (result.IsSuccess)
+        {
+            return Ok(result);
+        }
+        return BadRequest(result);
+    }
+
+    [HttpPut("status/{orderId}/{statusCode}")]
+    public async Task<IActionResult> EditStatusOrder(Guid orderId, int statusCode)
+    {
+        var result = await _orderService.EditStatusOrder(orderId, statusCode);
         if (result.IsSuccess)
         {
             return Ok(result);

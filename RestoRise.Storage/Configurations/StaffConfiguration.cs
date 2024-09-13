@@ -8,11 +8,10 @@ public class StaffConfiguration:IEntityTypeConfiguration<Staff>
 {
     public void Configure(EntityTypeBuilder<Staff> builder)
     {
-        
+
         builder
-            .HasMany(x => x.Branches)
-            .WithMany(b => b.Staves)
-            .UsingEntity(j=>j.ToTable("BranchStaves"));
+            .HasOne(x => x.Branch)
+            .WithMany(b => b.Staves);
 
         builder
             .HasMany(c => c.Roles)

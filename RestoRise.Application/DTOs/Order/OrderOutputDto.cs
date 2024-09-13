@@ -1,4 +1,6 @@
-﻿namespace RestoRise.Application.DTOs.Order;
+﻿using RestoRise.Domain.Enums;
+
+namespace RestoRise.Application.DTOs.Order;
 
 public class OrderOutputDto
 {
@@ -14,7 +16,7 @@ public class OrderOutputDto
     public string Comment { get; set; }
     public string Branch { get; set; }
     public ICollection<OrderDetailOutputDto> OrderDetails { get; set; }
-
+    public OrderStatus Status { get; set; } 
 }
 
 public class OrderDetailOutputDto

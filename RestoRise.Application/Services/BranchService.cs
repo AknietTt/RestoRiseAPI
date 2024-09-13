@@ -92,4 +92,12 @@ public class BranchService : IBranchService
         var res = _mapper.Map<BranchUpdateDto>(branch);
         return Result<BranchUpdateDto>.Success(res,  200);
     }
+
+    public async Task<Result<IEnumerable<BranchOutputDto>>> GetByOwner(Guid ownerId)
+    {
+        var branches = await _unitOfWork.GetRepository<Branch>()
+            .GetAsync(x => x.Restaurant.Owner.Id == ownerId, includeProperties: new[] { "City", "Restaurant" });
+        var res = _mapper.Map<IEnumerable<BranchOutputDto>>(branches);
+        return Result<IEnumerable<BranchOutputDto>>.Success(res, 200);
+    }
 }

@@ -99,4 +99,18 @@ public class BrachController:ControllerBase
             return BadRequest(result);
         }
     }
+    
+    [HttpGet("owner/{ownerId}")]
+    public async Task<IActionResult> GetByOwner(Guid ownerId)
+    {
+        var result = await _branchService.GetByOwner(ownerId);
+        if (result.IsSuccess)
+        {
+            return Ok(result);
+        }
+        else
+        {
+            return BadRequest(result);
+        }
+    }
 }

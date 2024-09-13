@@ -4,6 +4,7 @@ using RestoRise.Application.Interfaces.Repositories;
 using RestoRise.Application.Interfaces.Services;
 using RestoRise.Domain.Common;
 using RestoRise.Domain.Entities;
+using RestoRise.Domain.Enums;
 
 namespace RestoRise.BuisnessLogic.Services;
 
@@ -38,6 +39,7 @@ public class OrderService : IOrderService
                 Entrance = dto.Entrance,
                 Intercom = dto.Intercom,
                 Comment = dto.Comment,
+                Status = OrderStatus.Pending ,
                 OrderDetails = new List<OrderDetail>()
             };
 
@@ -88,42 +90,116 @@ public class OrderService : IOrderService
         }
     }
 
-    public async Task<Result<IEnumerable<OrderOutputDto>>> GetOredersByOwner(Guid ownerId)
-    {
-        try
-        {
-            // Получение ресторанов владельца
-            var restaurantRepository = _unitOfWork.GetRepository<Restaurant>();
-            var ownerRestaurants = await restaurantRepository.GetAsync(x => x.Owner.Id == ownerId);
 
-            if (ownerRestaurants == null || !ownerRestaurants.Any())
+
+    public async Task<Result<IEnumerable<OrderOutputDto>>> GetOrdersByUserId(Guid ownerId, int statusCode)
+{
+    try
+    {
+        // Получение репозиториев ресторанов, филиалов и сотрудников
+        var restaurantRepository = _unitOfWork.GetRepository<Restaurant>();
+        var staffRepository = _unitOfWork.GetRepository<Staff>();
+        var branchRepository = _unitOfWork.GetRepository<Branch>();
+        var orderRepository = _unitOfWork.GetRepository<Order>();
+
+        // Получение ресторанов владельца
+        var ownerRestaurants = await restaurantRepository.GetAsync(x => x.Owner.Id == ownerId);
+
+        // Если рестораны владельца не найдены, ищем заказы через филиал сотрудника
+        if (ownerRestaurants == null || !ownerRestaurants.Any())
+        {
+            // Получение сотрудника по идентификатору пользователя (ownerId)
+            var staffMember = await staffRepository.FirstOrDefault(s => s.Id == ownerId, includeProperties: new[] { "Branch.Restaurant" });
+
+            if (staffMember == null)
             {
-                return Result<IEnumerable<OrderOutputDto>>.Failure("No restaurants found for the given owner.", 404);
+                return Result<IEnumerable<OrderOutputDto>>.Failure("No restaurants or staff found for the given user.", 404);
             }
 
-            // Получение идентификаторов ресторанов владельца
-            var restaurantIds = ownerRestaurants.Select(r => r.Id).ToList();
+            // Получение ресторана через филиал сотрудника
+            var staffRestaurant = staffMember.Branch.Restaurant;
 
-            // Получение заказов, связанных с этими ресторанами
-            var orderRepository = _unitOfWork.GetRepository<Order>();
-            var orders = await orderRepository.GetAsync(
-                o => o.OrderDetails.Any(od => restaurantIds.Contains(od.Food.Restaurant.Id)),
+            if (staffRestaurant == null)
+            {
+                return Result<IEnumerable<OrderOutputDto>>.Failure("No restaurant found for the staff member.", 404);
+            }
+
+            // Проверка статуса заказа
+            if (!Enum.TryParse(statusCode.ToString(), out OrderStatus status))
+            {
+                return Result<IEnumerable<OrderOutputDto>>.Failure("Invalid status code", 400);
+            }
+
+            // Получение заказов, связанных с рестораном филиала сотрудника
+            var staffOrders = await orderRepository.GetAsync(
+                o => o.OrderDetails.Any(od => od.Food.Restaurant.Id == staffRestaurant.Id && o.Status == status),
                 includeProperties: new[] { "Branch", "OrderDetails.Food" }
             );
 
-            if (orders == null || !orders.Any())
-            {
-                return Result<IEnumerable<OrderOutputDto>>.Failure("No orders found for the given owner.", 404);
-            }
-
             // Маппинг заказов в DTO
-            var orderOutputDtos = _mapper.Map<IEnumerable<OrderOutputDto>>(orders);
-
-            return Result<IEnumerable<OrderOutputDto>>.Success(orderOutputDtos);
+            var staffOrderOutputDtos = _mapper.Map<IEnumerable<OrderOutputDto>>(staffOrders);
+            return Result<IEnumerable<OrderOutputDto>>.Success(staffOrderOutputDtos);
         }
-        catch (Exception ex)
+
+        // Проверка статуса заказа для ресторанов владельца
+        if (!Enum.TryParse(statusCode.ToString(), out OrderStatus ownerStatus))
         {
-            return Result<IEnumerable<OrderOutputDto>>.Failure($"An error occurred while retrieving the orders: {ex.Message}", 500);
-        }  
+            return Result<IEnumerable<OrderOutputDto>>.Failure("Invalid status code", 400);
+        }
+
+        // Получение идентификаторов ресторанов владельца
+        var restaurantIds = ownerRestaurants.Select(r => r.Id).ToList();
+
+        // Получение заказов, связанных с ресторанами владельца
+        var ownerOrders = await orderRepository.GetAsync(
+            o => o.OrderDetails.Any(od => restaurantIds.Contains(od.Food.Restaurant.Id) && o.Status == ownerStatus),
+            includeProperties: new[] { "Branch", "OrderDetails.Food" }
+        );
+
+        // Маппинг заказов в DTO
+        var ownerOrderOutputDtos = _mapper.Map<IEnumerable<OrderOutputDto>>(ownerOrders);
+
+        return Result<IEnumerable<OrderOutputDto>>.Success(ownerOrderOutputDtos);
     }
+    catch (Exception ex)
+    {
+        return Result<IEnumerable<OrderOutputDto>>.Failure($"An error occurred while retrieving the orders: {ex.Message}", 500);
+    }
+}
+
+    public async Task<Result<OrderOutputDto>> GetOrderDetail(Guid orderId)
+    {
+        var repository =  _unitOfWork.GetRepository<Order>();
+        var order = await repository.FirstOrDefault(x => x.Id == orderId,
+            includeProperties: new[] { "Branch", "OrderDetails.Food" });
+        if (order == null)
+        {
+            return Result<OrderOutputDto>.Failure(  "Order not found", 404);     
+        }
+        var result = _mapper.Map<OrderOutputDto>(order);
+        return Result<OrderOutputDto>.Success(result);
+    }
+
+    public async Task<Result<bool>> EditStatusOrder(Guid orderId, int statusCode)
+    {
+        var repository = _unitOfWork.GetRepository<Order>();
+        var order = await repository.FirstOrDefault(x => x.Id == orderId);
+    
+        if (order == null)
+        {
+            return Result<bool>.Failure("Order not found" , 404);
+        }
+
+        if (!Enum.IsDefined(typeof(OrderStatus), statusCode))
+        {
+            return Result<bool>.Failure("Invalid status code", 400);
+        }
+        order.Status = (OrderStatus)statusCode;
+        // repository.Attach(order);
+        repository.Update(order);
+        await _unitOfWork.SaveChangesAsync();
+
+        return Result<bool>.Success(true);
+    }
+
 }

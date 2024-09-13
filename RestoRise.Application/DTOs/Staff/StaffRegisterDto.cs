@@ -1,8 +1,6 @@
-﻿using RestoRise.Domain.Common;
+﻿namespace RestoRise.Application.DTOs.Staff;
 
-namespace RestoRise.Domain.Entities;
-
-public class Staff:Entity
+public class StaffRegisterDto
 {
     public string FirstName { get; set; }
     public string SecondName { get; set; }
@@ -14,7 +12,7 @@ public class Staff:Entity
     public string Gender { get; set; }
     public string? TelegramNick { get; set; }
     
-    public ICollection<Role> Roles { get; set; }
+    public Guid RoleId { get; set; }
     
-    public Branch Branch { get; set; }
+    public Guid BranchId { get; set; }
 }

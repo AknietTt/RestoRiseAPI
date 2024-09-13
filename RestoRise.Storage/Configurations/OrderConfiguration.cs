@@ -16,5 +16,9 @@ public class OrderConfiguration:IEntityTypeConfiguration<Order>
         builder
             .HasMany(x => x.OrderDetails)
             .WithOne(x => x.Order);
+        
+        builder
+            .Property(o => o.Status)
+            .HasConversion<string>();
     }
 }

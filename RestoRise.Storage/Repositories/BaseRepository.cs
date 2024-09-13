@@ -48,11 +48,19 @@ public abstract class BaseRepository<TEntity> : ICrudRepository<TEntity>
         {
             query = query.Where(filter);
         }
-
-        if (includeProperties is { Length: > 0 })
+        
+        if (includeProperties != null)
         {
-            query = query.ProjectTo<TEntity>(_mapper.ConfigurationProvider, null, includeProperties);
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
         }
+        
+        // if (includeProperties is { Length: > 0 })
+        // {
+        //     query = query.ProjectTo<TEntity>(_mapper.ConfigurationProvider, null, includeProperties);
+        // }
         return await query.FirstOrDefaultAsync();
     }
 

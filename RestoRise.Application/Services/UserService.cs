@@ -66,7 +66,12 @@ public class UserService: IUserService
         var user = await  _unitOfWork.GetRepository<User>().FirstOrDefault(x => x.Id == userId);
         if (user == null)
         {
-            return Result<UserDto>.Failure("Пользователь не найдено", 404);
+            var staff = await  _unitOfWork.GetRepository<Staff>().FirstOrDefault(x => x.Id == userId);
+            if (staff == null)
+            {
+                return Result<UserDto>.Failure("Пользователь не найдено", 404);
+            }
+            return Result<UserDto>.Success( _mapper.Map<UserDto>(staff));
         }
 
         return Result<UserDto>.Success( _mapper.Map<UserDto>(user));
@@ -78,7 +83,8 @@ public class UserService: IUserService
         var claims = new List<Claim>
         {
             new("id", user.Id.ToString()),
-            new("email", user.Email)
+            new("email", user.Email),
+            new (ClaimTypes.Role , "Owner")
         };
 
         var tokenDescriptor = new JwtSecurityToken(
