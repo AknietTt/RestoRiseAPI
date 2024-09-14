@@ -95,4 +95,19 @@ public class RestaurantService : IRestaurnatService
       var restaurant =  await _restaurantRepositry.FirstOrDefault(x => x.Id == id);
       return Result<RestaurantUpdateDto>.Success( _mapper.Map<RestaurantUpdateDto>(restaurant), 200);
     }
+
+    public async Task<Result<IEnumerable<RestaurantOutputDto>>> SearchRestaurants(string text)
+    {
+        var lowerText = text.ToLower();
+        
+        var restaurants = await _restaurantRepositry.GetAsync(
+            x => x.Name.ToLower().StartsWith(lowerText) || 
+                 x.Name.ToLower().Contains(lowerText) ||   
+                 x.Description.ToLower().Contains(lowerText) || 
+                 x.Foods.Any(f => f.Name.ToLower().Contains(lowerText)) 
+        );
+
+       var result =  _mapper.Map<IEnumerable<RestaurantOutputDto>>(restaurants);
+       return Result<IEnumerable<RestaurantOutputDto>>.Success(result);
+    }
 }

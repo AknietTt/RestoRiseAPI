@@ -11,4 +11,5 @@ public interface IRestaurnatService
     Task<Result<bool>> Delete(Guid id);
     Task<Result<IEnumerable<RestaurantOutputDto>>> GetRestaurantsByOwner(Guid ownerId);
     Task<Result<RestaurantUpdateDto>> GetRestaurantById(Guid id);
+    Task<Result<IEnumerable<RestaurantOutputDto>>> SearchRestaurants(string text);
 }

@@ -2,14 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using RestoRise.Application.DTOs.Restaurant;
 using RestoRise.Application.Interfaces.Services;
-using RestoRise.Domain.Common;
 
 namespace RestoRise.Api.Controllers.Restaurants;
 
 [Authorize(AuthenticationSchemes = "Bearer")]
 [ApiController]
 [Route("restaurant")]
-public class RestaurantController:ControllerBase
+public class RestaurantController : ControllerBase
 {
     private readonly IRestaurnatService _restaurnatService;
 
@@ -19,98 +18,83 @@ public class RestaurantController:ControllerBase
     }
 
     #region GET
+
     [AllowAnonymous]
     [HttpGet("all/{cityId}")]
     public async Task<IActionResult> GetAll(Guid cityId)
     {
         var result = await _restaurnatService.GetAllRestaurants(cityId);
         if (result.IsSuccess)
-        {
             return Ok(result);
-        }
-        else
-        {
-            return BadRequest(result);
-        }
+        return BadRequest(result);
     }
+
+    [AllowAnonymous]
+    [HttpGet("search/{text}")]
+    public async Task<IActionResult> Search(string text)
+    {
+        var result = await _restaurnatService.SearchRestaurants(text);
+        if (result.IsSuccess)
+            return Ok(result);
+        return BadRequest(result);
+    }
+
     [HttpGet("{ownerId}")]
     public async Task<IActionResult> GetByOwner(Guid ownerId)
     {
         var result = await _restaurnatService.GetRestaurantsByOwner(ownerId);
         if (result.IsSuccess)
-        {
             return Ok(result);
-        }
-        else
-        {
-            return BadRequest(result);
-        }
+        return BadRequest(result);
     }
 
     [HttpGet("all")]
     public async Task<IActionResult> GetAll()
     {
-        var result =  await _restaurnatService.GetAllRestaurants();
+        var result = await _restaurnatService.GetAllRestaurants();
         if (result.IsSuccess)
-        {
             return Ok(result);
-        }
-        else
-        {
-            return BadRequest(result);
-        }
+        return BadRequest(result);
     }
 
     [HttpGet("get/{id}")]
     public async Task<IActionResult> Get(Guid id)
     {
         var result = await _restaurnatService.GetRestaurantById(id);
-        
+
         if (result.IsSuccess)
-        {
             return Ok(result);
-        }
-        else
-        {
-            return BadRequest(result);
-        }
+        return BadRequest(result);
     }
+
     #endregion
 
     #region POST
+
     [HttpPost("create")]
     public async Task<IActionResult> Create([FromBody] RestaurantCreateDto restaurantCreateDto)
     {
-        var result =  await _restaurnatService.CreateRestaurant(restaurantCreateDto);
+        var result = await _restaurnatService.CreateRestaurant(restaurantCreateDto);
         if (result.IsSuccess)
-        {
             return Ok(result);
-        }
-        else
-        {
-            return BadRequest(result);
-        }
+        return BadRequest(result);
     }
+
     #endregion
 
     #region PUT
+
     [HttpPut("update/{id}")]
-    public async Task<IActionResult> Update([FromBody] RestaurantUpdateDto restaurnatUpdateDto, Guid id )
+    public async Task<IActionResult> Update([FromBody] RestaurantUpdateDto restaurnatUpdateDto, Guid id)
     {
         if (restaurnatUpdateDto.Id != id)
-        {
             return BadRequest("Не равно id переданной в параметрах и в теле запроса restaurant.id != id");
-        }
-        var result =  await _restaurnatService.UpdateRestaurant(restaurnatUpdateDto);
+        var result = await _restaurnatService.UpdateRestaurant(restaurnatUpdateDto);
         if (result.IsSuccess)
-        {
             return Ok(result);
-        }
-        else
-        {
-            return BadRequest(result);
-        }
+        return BadRequest(result);
     }
+
     #endregion
 
     #region DELETE
@@ -118,18 +102,11 @@ public class RestaurantController:ControllerBase
     [HttpDelete("delete/{id}")]
     public async Task<IActionResult> Delete(Guid id)
     {
-        var result =  await _restaurnatService.Delete(id);
+        var result = await _restaurnatService.Delete(id);
         if (result.IsSuccess)
-        {
             return Ok(result);
-        }
-        else
-        {
-            return BadRequest(result);
-        }
+        return BadRequest(result);
     }
 
     #endregion
-
-   
 }
