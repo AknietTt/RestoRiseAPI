@@ -9,5 +9,6 @@ public class AddOrderDto
     public string Entrance { get; set; }
     public string Intercom { get; set; }
     public string Comment { get; set; }
+    public Guid BranchId { get; set; }
     public ICollection<OrderDetailDto> OrderDetailDtos { get; set; }
 }

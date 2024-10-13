@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using RestoRise.Application.DTOs;
 using RestoRise.Application.Interfaces.Services;
@@ -39,9 +40,18 @@ public class AuthController:ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("info/{userId}")]
-    public async Task<IActionResult> GetUserInfo(Guid userId)
+    [HttpGet("info/")]
+    public async Task<IActionResult> GetUserInfo()
     {
+        var userIdClaim = User.FindFirst("id"); 
+
+        if (userIdClaim == null)
+        {
+            return Unauthorized("User ID not found in token.");
+        }
+
+        Guid userId = Guid.Parse(userIdClaim.Value); 
+
         var result = await _userService.GetUserInfo(userId);
         if (!result.IsSuccess)
         {

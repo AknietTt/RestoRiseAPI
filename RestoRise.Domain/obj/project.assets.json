@@ -2427,11 +2427,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\HW\\С#\\RestoRise\\RestoRise.Domain\\RestoRise.Domain.csproj",
+      "projectUniqueName": "C:\\Project\\Back\\RestoRise\\RestoRise.Domain\\RestoRise.Domain.csproj",
       "projectName": "RestoRise.Domain",
-      "projectPath": "C:\\HW\\С#\\RestoRise\\RestoRise.Domain\\RestoRise.Domain.csproj",
+      "projectPath": "C:\\Project\\Back\\RestoRise\\RestoRise.Domain\\RestoRise.Domain.csproj",
       "packagesPath": "C:\\Users\\77762\\.nuget\\packages\\",
-      "outputPath": "C:\\HW\\С#\\RestoRise\\RestoRise.Domain\\obj\\",
+      "outputPath": "C:\\Project\\Back\\RestoRise\\RestoRise.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\DevExpress 22.2\\Components\\Offline Packages"

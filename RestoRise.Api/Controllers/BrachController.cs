@@ -71,11 +71,26 @@ public class BrachController:ControllerBase
             return BadRequest(result);
         }
     }
-    
+  
     [HttpGet("restaurant/{restaurantId}")]
     public async Task<IActionResult> GetByRestaurantId(Guid restaurantId)
     {
         var result = await _branchService.GetByRestaurant(restaurantId);
+        if (result.IsSuccess)
+        {
+            return Ok(result);
+        }
+        else
+        {
+            return BadRequest(result);
+        }
+    }
+    
+    [AllowAnonymous]
+    [HttpGet("restaurant/{restaurantId}/{cityId}")]
+    public async Task<IActionResult> GetByRestaurantId(Guid restaurantId , Guid cityId)
+    {
+        var result = await _branchService.GetByRestaurant(restaurantId , cityId);
         if (result.IsSuccess)
         {
             return Ok(result);

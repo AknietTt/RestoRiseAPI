@@ -1100,11 +1100,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\HW\\С#\\RestoRise\\RestoRise.Application\\RestoRise.Application.csproj",
+      "projectUniqueName": "C:\\Project\\Back\\RestoRise\\RestoRise.Application\\RestoRise.Application.csproj",
       "projectName": "RestoRise.Application",
-      "projectPath": "C:\\HW\\С#\\RestoRise\\RestoRise.Application\\RestoRise.Application.csproj",
+      "projectPath": "C:\\Project\\Back\\RestoRise\\RestoRise.Application\\RestoRise.Application.csproj",
       "packagesPath": "C:\\Users\\77762\\.nuget\\packages\\",
-      "outputPath": "C:\\HW\\С#\\RestoRise\\RestoRise.Application\\obj\\",
+      "outputPath": "C:\\Project\\Back\\RestoRise\\RestoRise.Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\DevExpress 22.2\\Components\\Offline Packages"
@@ -1126,8 +1126,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\HW\\С#\\RestoRise\\RestoRise.Domain\\RestoRise.Domain.csproj": {
-              "projectPath": "C:\\HW\\С#\\RestoRise\\RestoRise.Domain\\RestoRise.Domain.csproj"
+            "C:\\Project\\Back\\RestoRise\\RestoRise.Domain\\RestoRise.Domain.csproj": {
+              "projectPath": "C:\\Project\\Back\\RestoRise\\RestoRise.Domain\\RestoRise.Domain.csproj"
             }
           }
         }

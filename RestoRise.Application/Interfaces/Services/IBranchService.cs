@@ -9,6 +9,7 @@ public interface IBranchService
     Task<Result<BranchUpdateDto>> UpdateBranch(BranchUpdateDto dto);
     Task<Result<bool>> DeleteBranch(Guid id);
     Task<Result<IEnumerable<BranchOutputDto>>> GetByRestaurant(Guid restaurantId);
+    Task<Result<IEnumerable<BranchOutputDto>>> GetByRestaurant(Guid restaurantId, Guid cityId);
     Task<Result<BranchUpdateDto>> GetBranchById(Guid id);
     Task<Result<IEnumerable<BranchOutputDto>>> GetByOwner(Guid ownerId);
 }

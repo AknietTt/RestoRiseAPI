@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = RestoRise.Storage
-build_property.ProjectDir = C:\HW\С#\RestoRise\RestoRise.Storage\
+build_property.ProjectDir = C:\Project\Back\RestoRise\RestoRise.Storage\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

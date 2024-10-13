@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JLowUMsJSS93r/L+M9nzovwMCOap/K8oTJYMRL6W+ZczQHblpVwgyU2uWMWRKU6E+sYOFryV38RH+Olijc79Fw==",
+  "dgSpecHash": "5V0I4yCnOwg+flSJnrOJA3xNMFm6g/cl0PJwOSv5KCxWuN4QRyHnhfzZNQ3rbLThhqKDhA/gnf4Ozr+GBjbgAw==",
   "success": true,
-  "projectFilePath": "C:\\HW\\С#\\RestoRise\\RestoRise.Application\\RestoRise.Application.csproj",
+  "projectFilePath": "C:\\Project\\Back\\RestoRise\\RestoRise.Application\\RestoRise.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\77762\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\77762\\.nuget\\packages\\awssdk.core\\3.7.302.20\\awssdk.core.3.7.302.20.nupkg.sha512",

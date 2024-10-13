@@ -66,7 +66,7 @@ public class UserService: IUserService
         var user = await  _unitOfWork.GetRepository<User>().FirstOrDefault(x => x.Id == userId);
         if (user == null)
         {
-            var staff = await  _unitOfWork.GetRepository<Staff>().FirstOrDefault(x => x.Id == userId);
+            var staff = await  _unitOfWork.GetRepository<Staff>().FirstOrDefault(x => x.Id == userId, includeProperties: new []{"Roles"});
             if (staff == null)
             {
                 return Result<UserDto>.Failure("Пользователь не найдено", 404);
@@ -74,7 +74,9 @@ public class UserService: IUserService
             return Result<UserDto>.Success( _mapper.Map<UserDto>(staff));
         }
 
-        return Result<UserDto>.Success( _mapper.Map<UserDto>(user));
+        var result = _mapper.Map<UserDto>(user);
+        result.Roles = ["Owner"];
+        return Result<UserDto>.Success( result);
     }
 
     private string GenerateToken(User user)

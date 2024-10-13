@@ -28,6 +28,9 @@ public class OrderService : IOrderService
             var foodRepository = _unitOfWork.GetRepository<Food>();
             var orderDetailRepository = _unitOfWork.GetRepository<OrderDetail>();
 
+            var branch = await branchRepository.FirstOrDefault(x => x.Id == dto.BranchId);
+            branchRepository.Attach(branch);
+
             // Create new order
             var order = new Order
             {
@@ -40,9 +43,9 @@ public class OrderService : IOrderService
                 Intercom = dto.Intercom,
                 Comment = dto.Comment,
                 Status = OrderStatus.Pending ,
+                Branch =branch ,
                 OrderDetails = new List<OrderDetail>()
             };
-
             // Add order details
             foreach (var detailDto in dto.OrderDetailDtos)
             {
@@ -59,26 +62,6 @@ public class OrderService : IOrderService
                 order.OrderDetails.Add(orderDetail);
             }
 
-            // Select a random branch from the collected branches
-            if (order.OrderDetails.SelectMany(od => od.Food.Restaurant.Branches).Any())
-            {
-                var allBranches = order.OrderDetails.SelectMany(od => od.Food.Restaurant.Branches).ToList();
-                var random = new Random();
-                var randomBranch = allBranches[random.Next(allBranches.Count)];
-
-                // Ensure branch is tracked
-                var branch = await branchRepository.GetAsync(randomBranch.Id);
-                if (branch != null)
-                    order.Branch = branch;
-                else
-                    return Result<bool>.Failure("Branch not found.", 400);
-            }
-            else
-            {
-                return Result<bool>.Failure("No branches available to assign to the order.", 400);
-            }
-
-            // Save order
             await orderRepository.AddAsync(order);
             await _unitOfWork.SaveChangesAsync();
 

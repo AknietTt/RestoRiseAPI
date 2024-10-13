@@ -38,6 +38,16 @@ public class RestaurantController : ControllerBase
             return Ok(result);
         return BadRequest(result);
     }
+    
+    // [AllowAnonymous]
+    // [HttpGet("branch/{restaurantId}")]
+    // public async Task<IActionResult> GetBranch(Guid restaurantId)
+    // {
+    //     var result = await _restaurnatService.SearchRestaurants(text);
+    //     if (result.IsSuccess)
+    //         return Ok(result);
+    //     return BadRequest(result);
+    // }    
 
     [HttpGet("{ownerId}")]
     public async Task<IActionResult> GetByOwner(Guid ownerId)
